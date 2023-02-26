@@ -20,7 +20,7 @@ class Admin extends CI_Controller {
         $data['title'] = "Admin";
         $this->load->view('include/header', $data);
         $this->load->view('include/navbar_admin');
-        $this->load->view('admin/homepage_view');
+        $this->load->view('admin/admin_homepage');
         $this->load->view('include/footer');
     }
 };
