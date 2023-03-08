@@ -28,11 +28,10 @@
     <nav class="navbar">
         <div id="nav-close" class="fas fa-times"></div>
         <a href="#home">home</a>
-        <a href="#about">Button1</a>
         <a href="addtocart.html">shop</a>
-        <a href="#blogs">Daily updates</a>
-        <a href="#">Profile</a>
-        <a href="registration.html">Sign-in/Sign-up</a>
+        <!-- <a href="#blogs">Daily updates</a> -->
+        <!-- <a href="#">Profile</a> -->
+        <a href="<?= site_url('Users/login'); ?>">Login</a>
     </nav>
 
     <div class="icons">
