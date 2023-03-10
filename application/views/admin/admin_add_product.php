@@ -97,3 +97,50 @@
         </div>
     </div>
 </section>
+
+<!-- Modal -->
+<?php if ($this->session->flashdata('product_success')): ?>
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center p-1 m-3">
+                        <div class="text-center">
+                            <div class="d-flex justify-content-center">                                
+                                <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_gaxn5gzy.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;"  loop  autoplay></lottie-player>
+                            </div>
+                            <h1><?= $this->session->flashdata('product_success'); ?></h1>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+<?php elseif ($this->session->flashdata('product_error')): ?>
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center p-1 m-3">
+                        <div class="text-center">
+                            <div class="d-flex justify-content-center">                                
+                                <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_gaxn5gzy.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;"  loop  autoplay></lottie-player>
+                            </div>
+                            <h1><?= $this->session->flashdata('product_error'); ?></h1>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif ?>
+
+<script>
+    var myModal = document.getElementById('successModal');
+    // Determine when to show the modal
+    document.addEventListener('DOMContentLoaded', function() {
+        var myModal = document.getElementById('successModal');
+        var modal = new bootstrap.Modal(myModal);
+        modal.show();
+    });
+</script>
