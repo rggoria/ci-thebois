@@ -72,7 +72,7 @@
                     <?php endif;?>
                 </div>
                 <!-- Back button -->
-                <a href="<?= site_url('Admin') ?>" class="btn btn-danger btn-block mb-4 me-5" type="button">Go Back</a>
+                <a href="<?= site_url('Admin/homepage') ?>" class="btn btn-danger btn-block mb-4 me-5" type="button">Go Back</a>
                 <!-- Add button -->
                 <button type="submit" class="btn btn-success btn-block mb-4">Add User</button>
             <?php form_close(); ?>

@@ -11,6 +11,7 @@
                         <a class="ps-1 rounded nav-link" href="#simple-list-item-3">List of Inventory</a>
                         <a class="ps-1 rounded nav-link" href="#simple-list-item-4">List of Shipment</a>
                         <a class="ps-1 rounded nav-link" href="#simple-list-item-5">List of Transaction</a>
+                        <a class="ps-1 rounded nav-link" href="<?= site_url('Admin/logout') ?>">Logout</a>
                     </div>
                 </div>
             </div>
@@ -87,7 +88,7 @@
                                 <table class="table table-hover" id="userTable">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Name</th>
+                                            <th scope="col">ID</th>
                                             <th scope="col">Email</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Date Created</th>
@@ -98,11 +99,13 @@
                                         <?php if (!$user_list == 0): ?>
                                             <?php foreach($user_list as $user): ?>
                                                 <tr>
-                                                    <td><?= $user->user_username; ?></td>
+                                                    <td><?= $user->user_id; ?></td>
                                                     <td><?= $user->user_email; ?></td>
                                                     <td><?= $user->user_status; ?></td>
-                                                    <td><?= $user->user_date; ?></td>
-                                                    <td class="d-flex justify-content-start">
+                                                    <td>
+                                                        <p><?= $newdateformat = date("d M Y h:i A", strtotime($user->user_date));?></p>
+                                                    </td>
+                                                    <td class="d-flex justify-content-start p-5">
                                                         <?php if ($user->user_status == 'ADMIN'): ?>
                                                             <a href="<?= site_url('Admin/edit_courier/'.$user->user_id) ?>" class="btn btn-warning mx-1" type="button">Edit</a>
                                                         <?php elseif($user->user_status == 'DISABLE'): ?>
@@ -143,6 +146,7 @@
                                 <table class="table table-hover" id="inventoryTable">
                                     <thead>
                                         <tr>
+                                            <th scope="col">ID</th>
                                             <th scope="col">Name</th>
                                             <th scope="col">Price</th>
                                             <th scope="col">Category</th>
@@ -155,12 +159,15 @@
                                         <?php if (!$product_list == 0): ?>
                                             <?php foreach($product_list as $product): ?>
                                                 <tr>
+                                                    <td><?= $product->product_id; ?></td>
                                                     <td><?= $product->product_name; ?></td>
                                                     <td><?= $product->product_price; ?></td>
                                                     <td><?= $product->product_category; ?></td>
                                                     <td><?= $product->product_status; ?></td>
-                                                    <td><?= $product->product_date; ?></td>
-                                                    <td class="d-flex justify-content-start">
+                                                    <td>
+                                                        <p><?= $newdateformat = date("d M Y h:i A", strtotime($product->product_date));?></p>
+                                                    </td>
+                                                    <td class="d-flex justify-content-start p-5">
                                                         <?php if($product->product_status == 'ACTIVE'): ?>
                                                             <a href="<?= site_url('Admin/edit_product/'.$product->product_id) ?>" class="btn btn-warning mx-1" type="button">Edit</a>
                                                             <a href="<?= site_url('Admin/disable_product/'.$product->product_id) ?>" class="btn btn-danger mx-1" type="button">DISABLE</a>

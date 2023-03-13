@@ -3,22 +3,6 @@
     <h5>Pick one that's nearest to you.</h5>
 </section>
 
-<section class="bg-secondary text-center container-fluid">    
-    <div class="row py-lg-5">
-        <div class=" text-white align-self-center">
-            <h1>New Package Pending in:</h1>
-            <h3>4 hours 34 minutes 29 seconds</h3>
-        </div>
-    </div>
-</section>
-
-<div class="w-50 align-self-center p-5">
-    <h2>Can't find the specific ID?</h2>
-    <p>Find Your Grade ID Here:</p>  
-    <input class="form-control" id="myInput" type="text" placeholder="Enter Grade ID">
-</div>
-
-
 <div class="container mt-3 mb-3">
     <div class="row">
         <div class="col-4">

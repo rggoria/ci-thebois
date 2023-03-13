@@ -5,13 +5,27 @@ class Store extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->helper(['url', 'form']);
+        $this->load->library('session');
     }
 
     public function index() {
-        $this->load->view('include/store/header');
-        $this->load->view('include/store/navbar');
-        $this->load->view('store/store_index');
-        $this->load->view('include/store/footer');
+        if ($this->session->userdata('login_status')) {
+            if ($this->session->userdata('login_status') == 'ADMIN') {
+                redirect('Admin/homepage');
+            } elseif ($this->session->userdata('login_status') == 'COURIER') {
+                redirect('Courier');
+            } else {
+                $this->load->view('include/store/header');
+                $this->load->view('include/store/navbar');
+                $this->load->view('store/store_index');
+                $this->load->view('include/store/footer');
+            }
+        } else {
+            $this->load->view('include/store/header');
+            $this->load->view('include/store/navbar');
+            $this->load->view('store/store_index');
+            $this->load->view('include/store/footer');
+        }
     }
 
     public function catalog($category) {
