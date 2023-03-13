@@ -10,4 +10,8 @@ class Store extends CI_Controller {
     public function index() {
         $this->load->view('store/store_index');
     }
+
+    public function product() {
+        $this->load->view('store/store_products');
+    }
 }
