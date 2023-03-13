@@ -19,6 +19,69 @@ class Admin extends CI_Controller {
     }
     public function index() {
         // Page Title
+        $data['title'] = "Admin: Login";
+
+        $this->load->view('include/header', $data);
+        $this->load->view('admin/admin_login');
+        $this->load->view('include/footer');
+    }
+
+    // Start Login Functions //
+    public function login_validation() {
+        $required = "This field is required";
+        $login = $this->input->post('login');
+        $password = $this->input->post('password');
+
+        $this->form_validation->set_rules('login', 'Email or Username', 'required', 'required', $required);
+        $this->form_validation->set_rules('password', 'Password', 'required', 'required', $required);
+        // Form Validation
+        if(!$this->form_validation->run())
+            $this->index();
+        else{
+            $account = $this->admindb->login_validation($login, $password);
+            if($account){
+                if ($account->user_status == 'ADMIN') {
+                    $session_login = array(
+                        'login_id' => $account->user_id,
+                        'login_username' => $account->user_username,
+                        'login_email' => $account->user_email,
+                        'login_password' => $account->user_password,
+                        'login_status' => $account->user_status
+                    );
+                    $this->session->set_userdata($session_login);
+                    $this->homepage();
+                } elseif ($account->user_status == 'COURIER') {
+                    $session_login = array(
+                        'login_id' => $account->user_id,
+                        'login_username' => $account->user_username,
+                        'login_firstname' => $account->user_firstname,
+                        'login_lastname' => $account->user_lastname,
+                        'login_email' => $account->user_email,
+                        'login_password' => $account->user_password,
+                        'login_status' => $account->user_status,
+                        'login_contact' => $account->user_contact,
+                        'login_address' => $account->user_address
+                    );
+                    $this->session->set_userdata($session_login);
+                    redirect('Courier');
+                } elseif ($account->user_status == 'DISABLE') {
+                    $this->session->set_flashdata('admin_login_disable', 'The account you input is disable.');
+                    $this->index();
+                } else {
+                    $this->session->set_flashdata('admin_login_user', 'This account has nothing in the admin');
+                    $this->index();
+                }
+            }else{
+                $this->session->set_flashdata('admin_login_failed', 'Login credentials are not correct.');
+                redirect('Admin');
+            }
+        }
+    }
+    // End Login Functions //
+
+    // Start Homepage Functions //
+    public function homepage() {
+        // Page Title
         $data['title'] = "Admin";
 
         // Fetch Data Count
@@ -35,7 +98,10 @@ class Admin extends CI_Controller {
         $this->load->view('include/footer');
     }
 
-    // Start Homepage Functions //
+    public function logout() {
+        $this->session->sess_destroy();
+        $this->index();
+    }
 
     // User Section //
     public function add_courier() {
@@ -57,19 +123,19 @@ class Admin extends CI_Controller {
     public function disable_user($id) {
         $this->admindb->admin_disable_user($id);
         $this->session->set_flashdata('user_disable', 'Account Status Change to Disable');
-        redirect('Admin');
+        $this->homepage();
     }
 
     public function courier_user($id) {
         $this->admindb->admin_courier_user($id);
         $this->session->set_flashdata('user_courier', 'Account Status Change to Courier');
-        redirect('Admin');
+        $this->homepage();
     }
 
     public function user_user($id) {
         $this->admindb->admin_user_user($id);
         $this->session->set_flashdata('user_user', 'Account Status Change to User');
-        redirect('Admin');
+        $this->homepage();
     }
     // User Section //
 
@@ -93,18 +159,14 @@ class Admin extends CI_Controller {
     public function disable_product($id) {
         $this->productdb->admin_disable_product($id);
         $this->session->set_flashdata('product_disable', 'Product Status Change to Disable');
-        redirect('Admin');
+        $this->homepage();
     }
 
     public function active_product($id) {
         $this->productdb->admin_active_product($id);
         $this->session->set_flashdata('product_active', 'Product Status Change to Active');
-        redirect('Admin');
+        $this->homepage();
     }
-    // Inventory Section //
-
-
-
     // End Homepage Functions //
 
     // Start Add Courier Functions //

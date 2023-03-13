@@ -62,7 +62,7 @@
                             <div class="card-footer">
                                 <div class="form-outline">
                                     <!-- Submit button -->
-                                    <a href="<?= site_url('Admin') ?>" class="btn btn-danger btn-block me-5" type="button">Go Back </a>
+                                    <a href="<?= site_url('Admin/homepage') ?>" class="btn btn-danger btn-block me-5" type="button">Go Back </a>
                                     <button type="submit" class="btn btn-success btn-block">Edit Product</button>
                                 </div>
                             </div>
