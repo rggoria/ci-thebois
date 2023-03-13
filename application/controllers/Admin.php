@@ -18,12 +18,27 @@ class Admin extends CI_Controller {
         $this->load->library(array('form_validation', 'pagination', 'upload', 'session'));
     }
     public function index() {
-        // Page Title
-        $data['title'] = "Admin: Login";
+        if ($this->session->userdata('login_status')) {
+            if ($this->session->userdata('login_status') == 'ADMIN') {
+                redirect('Admin/homepage');
+            } elseif ($this->session->userdata('login_status') == 'COURIER') {
+                redirect('Courier');
+            } else {
+                // Page Title
+                $data['title'] = "Admin: Login";
 
-        $this->load->view('include/header', $data);
-        $this->load->view('admin/admin_login');
-        $this->load->view('include/footer');
+                $this->load->view('include/admin/header', $data);
+                $this->load->view('admin/admin_login');
+                $this->load->view('include/admin/footer');
+            }
+        } else {
+            // Page Title
+            $data['title'] = "Admin: Login";
+
+            $this->load->view('include/admin/header', $data);
+            $this->load->view('admin/admin_login');
+            $this->load->view('include/admin/footer');
+        }
     }
 
     // Start Login Functions //
@@ -49,7 +64,7 @@ class Admin extends CI_Controller {
                         'login_status' => $account->user_status
                     );
                     $this->session->set_userdata($session_login);
-                    $this->homepage();
+                    redirect('Admin/homepage');
                 } elseif ($account->user_status == 'COURIER') {
                     $session_login = array(
                         'login_id' => $account->user_id,
@@ -93,31 +108,31 @@ class Admin extends CI_Controller {
         $data['product_list'] = $this->productdb->admin_product_list();
         $data['transaction_count'] = $this->transactiondb->admin_transaction_count();
         $data['transaction_list'] = $this->transactiondb->admin_transaction_list();
-        $this->load->view('include/header', $data);
+        $this->load->view('include/admin/header', $data);
         $this->load->view('admin/admin_homepage');
-        $this->load->view('include/footer');
+        $this->load->view('include/admin/footer');
     }
 
     public function logout() {
         $this->session->sess_destroy();
-        $this->index();
+        redirect('Admin');
     }
 
     // User Section //
     public function add_courier() {
         $data['title'] = "Admin Add Courier";
-        $this->load->view('include/header', $data);
+        $this->load->view('include/admin/header', $data);
         $this->load->view('admin/admin_add_courier');
-        $this->load->view('include/footer');
+        $this->load->view('include/admin/footer');
     }
     
     public function edit_courier($id) {
         $data['title'] = "Admin Edit Courier";
 
         $data['user_data'] = $this->admindb->admin_user_data($id);
-        $this->load->view('include/header', $data);
+        $this->load->view('include/admin/header', $data);
         $this->load->view('admin/admin_edit_courier');
-        $this->load->view('include/footer');
+        $this->load->view('include/admin/footer');
     }
 
     public function disable_user($id) {
@@ -142,18 +157,18 @@ class Admin extends CI_Controller {
     // Inventory Section //
     public function add_product() {
         $data['title'] = "Admin Add Inventory";
-        $this->load->view('include/header', $data);
+        $this->load->view('include/admin/header', $data);
         $this->load->view('admin/admin_add_product');
-        $this->load->view('include/footer');
+        $this->load->view('include/admin/footer');
     }
 
     public function edit_product($id) {
         $data['title'] = "Admin Edit Product";
 
         $data['product_data'] = $this->productdb->admin_product_data($id);
-        $this->load->view('include/header', $data);
+        $this->load->view('include/admin/header', $data);
         $this->load->view('admin/admin_edit_product');
-        $this->load->view('include/footer');
+        $this->load->view('include/admin/footer');
     }
 
     public function disable_product($id) {
@@ -205,7 +220,7 @@ class Admin extends CI_Controller {
         // Form Validation
         if (!$this->form_validation->run()) {
             $data['title'] = "GoShopping: Admin";
-            $this->load->view('include/header', $data);
+            $this->load->view('include/admin/header', $data);
             $this->load->view('admin/admin_add_courier', $data);
             $this->load->view('include/footer', $data);           
         } else {

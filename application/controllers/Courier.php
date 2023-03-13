@@ -20,19 +20,19 @@ class Courier extends CI_Controller {
         // Page Title
         $data['title'] = "Courier";
 
-        $this->load->view('include/header', $data);
-        $this->load->view('include/navbar_courier');
+        $this->load->view('include/courier/header', $data);
+        $this->load->view('include/courier/navbar');
         $this->load->view('courier/courier_homepage.php');
-        $this->load->view('include/footer');
+        $this->load->view('include/courier/footer');
     }
 
     public function courier_profile() {
         $data['title'] = "Courier Profile";
 
-        $this->load->view('include/header', $data);
-        $this->load->view('include/navbar_courier');
+        $this->load->view('include/courier/header', $data);
+        $this->load->view('include/courier/navbar');
         $this->load->view('courier/courier_profile.php');
-        $this->load->view('include/footer');
+        $this->load->view('include/courier/footer');
     }
 
     public function update_courier_validation() {
