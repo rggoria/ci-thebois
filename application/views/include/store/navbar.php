@@ -72,7 +72,7 @@
                             <tr>
                                 <td>Total:</td>
                                 <td>₱0</td>
-                                <td><button class="btn btn-primary">Proceed to Checkout</button></td>
+                                <td><a href="<?= site_url('Store/checkout'); ?>" class="btn btn-primary">Proceed to Checkout</a></td>
                             </tr>
                         </table>
                     </div>

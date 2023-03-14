@@ -66,4 +66,17 @@ class Store extends CI_Controller {
         
         $this->load->view('include/store/footer');
     }
+
+    public function checkout() {
+        $data = array (
+            'logged_in' => $this->logged_in,
+            'user_id' => $this->user_id,
+        );
+        
+        $this->load->view('include/store/header');
+        $this->load->view('include/store/navbar', $data);
+        $this->load->view('store/store_checkout');
+        $this->load->view('include/store/footer');
+        
+    }
 }
