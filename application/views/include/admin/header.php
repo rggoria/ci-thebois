@@ -11,5 +11,9 @@
     <script src="https://kit.fontawesome.com/767b1164ff.js" crossorigin="anonymous"></script>
     <!-- CSS -->
     <link rel = "stylesheet" type = "text/css" href = "<?php echo base_url(); ?>css/style.css">
+    <!-- Data Tables -->
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css">
+    <!-- LottieFiles -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
