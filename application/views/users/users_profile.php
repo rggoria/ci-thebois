@@ -4,13 +4,13 @@
             <div class="card w-100">
                 <img src="" alt="" class="img-fluid img-thumbnail">
                 <div class="card-body text-center">
-                    <h2>John Doe</h2>
-                    Some Customer Description <br>
-                    Some Customer Description <br>
+                    <h2> <?= $fullname ?></h2>
+                    A Customer on The Bois Gundam Shop <br>
+                    Collector of Gundam <br>
                     <br>
                     <div class="row">
                         <div class="col-md-6">
-                            <button class="btn btn-danger w-100">Logout</button>
+                            <a href="<?= site_url('Users/logout'); ?>" class="btn btn-danger w-100">Logout</a>
                         </div>
                         <div class="col-md-6">
                             <button class="btn btn-outline-primary w-100">Edit Profile</button>
@@ -29,7 +29,7 @@
                                     <h5>Complete Address:</h5>
                                 </div>
                                 <div class="col-md-8">
-                                    Complete Address
+                                    <?= $address ?>
                                 </div>
                             </div>
                         </li>
@@ -39,17 +39,7 @@
                                     <h5>Billing Address</h5>
                                 </div>
                                 <div class="col-md-8">
-                                    Billing Address
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <h5>Phone Number</h5>
-                                </div>
-                                <div class="col-md-8">
-                                    Some Phone Number
+                                    <?= $billing ?>
                                 </div>
                             </div>
                         </li>
@@ -59,7 +49,7 @@
                                     <h5>Contact Number</h5>
                                 </div>
                                 <div class="col-md-8">
-                                    Some Contact Number
+                                    <?= $contact ?>
                                 </div>
                             </div>
                         </li>
@@ -69,7 +59,7 @@
                                     <h5>Email Address</h5>
                                 </div>
                                 <div class="col-md-8">
-                                    Some Email Address
+                                    <?= $email ?>
                                 </div>
                             </div>
                         </li>
