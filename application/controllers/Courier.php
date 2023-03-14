@@ -19,7 +19,6 @@ class Courier extends CI_Controller {
     public function index() {
         // Page Title
         $data['title'] = "Courier";
-
         $data['order_list'] = $this->orderdb->courier_order_list();
         $this->load->view('include/courier/header', $data);
         $this->load->view('include/courier/navbar');
