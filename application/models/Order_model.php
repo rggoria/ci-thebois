@@ -18,8 +18,18 @@ class Order_model extends CI_Model {
         }
     }
 
-    // Admin Product List
+    // Admin Order List
     public function admin_order_list() {
+        $query = $this->db->from("order_table")->get();
+        if ($query->result() == NULL) {
+            return NULL;
+        } else {
+            return $query->result();
+        }
+    }
+
+    // Courier Order List
+    public function courier_order_list() {
         $query = $this->db->from("order_table")->get();
         if ($query->result() == NULL) {
             return NULL;

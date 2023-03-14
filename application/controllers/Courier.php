@@ -20,6 +20,7 @@ class Courier extends CI_Controller {
         // Page Title
         $data['title'] = "Courier";
 
+        $data['order_list'] = $this->orderdb->courier_order_list();
         $this->load->view('include/courier/header', $data);
         $this->load->view('include/courier/navbar');
         $this->load->view('courier/courier_homepage.php');
@@ -87,6 +88,25 @@ class Courier extends CI_Controller {
             $this->session->set_flashdata('courier_update', 'Account Successfully Updated');  
             $this->courier_profile();
         }
+    }
+
+    public function reserved_order($id) {
+        $reserved_id = $this->session->userdata('login_id');
+        $this->courierdb->courier_reserved_order($id, $reserved_id);
+        $this->session->set_flashdata('order_reserve', 'Order is now reserved');
+        $this->index();
+    }
+
+    public function delivered_order($id) {
+        $this->courierdb->courier_delivered_order($id);
+        $this->session->set_flashdata('order_delivered', 'Order is now delivered');
+        $this->index();
+    }
+
+    public function cancelled_order($id) {
+        $this->courierdb->courier_cancelled_order($id);
+        $this->session->set_flashdata('order_cancelled', 'Order is now cancelled');
+        $this->index();
     }
 
     public function logout() {
