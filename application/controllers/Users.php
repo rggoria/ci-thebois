@@ -80,6 +80,8 @@ class Users extends CI_Controller {
             );
             $this->session->set_userdata($userSession);
             redirect('Users/profile/'. $account->user_id);
+        } else {
+            redirect('Store');
         }
     }
 
