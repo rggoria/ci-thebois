@@ -49,6 +49,7 @@ class Store extends CI_Controller {
             'logged_in' => $this->logged_in,
             'user_id' => $this->user_id,
         );
+        $data['cart_items'] = $this->productdb->getItems($this->user_id);
         $this->load->view('include/store/header');
         $this->load->view('include/store/navbar', $data);
         
@@ -82,6 +83,16 @@ class Store extends CI_Controller {
         $this->load->view('include/store/navbar', $data);
         $this->load->view('store/store_checkout');
         $this->load->view('include/store/footer');
-        
+    }
+
+    public function add_cart($product_name, $price) {
+        $productData = array(
+            'user_id' => $this->user_id,
+            'product_name' => $product_name,
+            'product_price' => $price,
+            'order_status' => 'PENDING',
+        );
+        $this->productdb->insertItems($productData);
+        redirect('Store/catalog/high_grade');
     }
 }

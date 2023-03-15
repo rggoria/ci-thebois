@@ -18,6 +18,19 @@ class Product_model extends CI_Model {
         }
     }
 
+    public function getItems($user_id) {
+        $query = $this->db->select('product_name, product_price')
+            ->get_where('order_table', array(
+                'user_id' => $user_id,
+                'order_status' => 'PENDING'));
+        $result = $query->result();
+        return $result;
+    }
+
+    public function insertItems($productData) {
+        $this->db->insert('order_table', $productData);
+    }
+
     // Admin Product Count
     public function admin_product_count() {
         $query = $this->db->from("product_table")->get();
@@ -68,6 +81,6 @@ class Product_model extends CI_Model {
         $this->db->where('product_id', $id);
         $this->db->update('product_table', array('product_status' => 'ACTIVE')); 
     }
-    
+
 }
 ?>
