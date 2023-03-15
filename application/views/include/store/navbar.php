@@ -50,24 +50,18 @@
                     <table class="table dropdown-item" id="checkoutTable">
                         <thead>
                             <tr>
-                                <th>No.</th>
                                 <th>Name</th>
                                 <th>Price</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <?php 
-                                foreach($cart_items as $item): 
-                                $count = 1?>
+                            <?php foreach($cart_items as $item): ?>
                                 <tr>
-                                    <td><?= $count ?></td>
                                     <td><?= $item->product_name ?></td>
                                     <td><?= $item->product_price ?></td>
                                 </tr>
-                            <?php 
-                                $count++;
-                                endforeach; ?>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                     <div><hr class="dropdown-divider"></div>
