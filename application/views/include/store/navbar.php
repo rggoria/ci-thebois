@@ -11,24 +11,37 @@
             <li class="nav-item">
                 <a href="<?= site_url('Store/catalog/high_grade') ?>" class="nav-link">Shop</a>
             </li>
-            <li class="nav-item dropdown">
-                <div class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
-                    <span><i class="fa-solid fa-user"></i></span> Login
-                </div>
-                <div class="dropdown-menu dropdown-menu-lg-end p-3" style="min-width: 20rem;">
-                    <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input type="text" name="" id="" class="form-control" placeholder="example@email.com">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Password</label>
-                        <input type="password" name="" id="" class="form-control" placeholder="your password">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary w-100 mb-2">Login</button> <br>
-                    <p class="text-center">Don't have an account? <span role="button" data-bs-toggle="modal" data-bs-target="#staticModal" class="text-primary text-decoration-underline">Sign-up for free!</span></p>
-                </div>
+            <?php if($logged_in): ?>
+            
+            <li class="nav-item">
+                <a href="<?= site_url('Users/profile/'. $user_id); ?>" class="nav-link"><span><i class="fa-solid fa-user"></i></span> Profile</a>
             </li>
+
+            <?php else: ?>
+
+                <li class="nav-item dropdown">
+                    <div class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                        <span><i class="fa-solid fa-user"></i></span> Login
+                    </div>
+                    <div class="dropdown-menu dropdown-menu-lg-end p-3" style="min-width: 20rem;">
+                        <?= form_open('Users/login_user'); ?>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="text" name="email" id="" class="form-control" placeholder="example@email.com">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" name="password" id="" class="form-control" placeholder="your password">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 mb-2">Login</button> <br>
+                        <?= form_close(); ?>
+                        <p class="text-center">Don't have an account? <span role="button" data-bs-toggle="modal" data-bs-target="#staticModal" class="text-primary text-decoration-underline">Sign-up for free!</span></p>
+                    </div>
+                </li>
+
+            <?php endif; ?>
+            
             <li class="nav-item dropdown">
                 <div class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
                     <span><i class="fa-solid fa-cart-shopping"></i></span> My Cart
@@ -59,7 +72,7 @@
                             <tr>
                                 <td>Total:</td>
                                 <td>₱0</td>
-                                <td><button class="btn btn-primary">Proceed to Checkout</button></td>
+                                <td><a href="<?= site_url('Store/checkout'); ?>" class="btn btn-primary">Proceed to Checkout</a></td>
                             </tr>
                         </table>
                     </div>

@@ -8,6 +8,15 @@ class Users_model extends CI_Model {
         $this->load->database();
     }
 
+    public function getUser($email, $password) {
+        $query = $this->db->get_where('user_table', array(
+            'user_email' => $email,
+            'user_password' => $password,
+            'user_status' => 'USER',
+        ));
+        return $query->row();
+    }
+
     public function insertUser($userData) {
         $this->db->insert('user_table', $userData);
     }
