@@ -7,6 +7,8 @@ class Store extends CI_Controller {
         $this->load->helper(['url', 'form']);
         $this->load->library(['session']);
         $this->load->library('session');
+        // Load the models
+        $this->load->model('Product_model', 'productdb');
 
         // Session constants
         $this->user_id = $this->session->userdata('id');
@@ -50,18 +52,21 @@ class Store extends CI_Controller {
         $this->load->view('include/store/header');
         $this->load->view('include/store/navbar', $data);
         
+        // Fetch data from database
+        $data['product_list'] = $this->productdb->store_product_list();
+
         if ($category == "high_grade") {
-            $this->load->view('store/store_catalog_highgrade');
+            $this->load->view('store/store_catalog_highgrade', $data);
         } else if ($category == "real_grade") {
-            $this->load->view('store/store_catalog_realgrade');
+            $this->load->view('store/store_catalog_realgrade', $data);
         } else if ($category == "master_grade") {
-            $this->load->view('store/store_catalog_mastergrade');
+            $this->load->view('store/store_catalog_mastergrade', $data);
         } else if ($category == "perfect_grade") {
-            $this->load->view('store/store_catalog_perfectgrade');
+            $this->load->view('store/store_catalog_perfectgrade', $data);
         } else if ($category == "entry_grade") {
-            $this->load->view('store/store_catalog_entrygrade');
+            $this->load->view('store/store_catalog_entrygrade', $data);
         } else if ($category == "super_deformed") {
-            $this->load->view('store/store_catalog_superdeformed');
+            $this->load->view('store/store_catalog_superdeformed', $data);
         }
         
         $this->load->view('include/store/footer');

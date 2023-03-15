@@ -32,55 +32,53 @@
                                 <h1>Product Details</h1>
                             </div>
                             <div class="card-body">
-                                <div class="form-outline">
-                                    <!-- Product Name -->
+                                <!-- Product Name -->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label d-flex justify-content-start">Product Name</label>
                                     <div class="input-group">
-                                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                                        <span class="input-group-text">
+                                            <i class="fa-solid fa-user"></i>
+                                        </span>
                                         <input type="text" name="productname" class="form-control" placeholder="Product Name">
                                     </div>
-                                    <?php if(form_error('productname')):?>
-                                        <small class="text-danger fw-bold fst-italic"><?= form_error('productname'); ?></small>
-                                    <?php else:?>
-                                        <label class="form-label">Product Name</label>
-                                    <?php endif;?>
-
-                                    <!-- Product Description -->
+                                    <small class="text-danger fw-bold fst-italic"> <?= form_error('productname'); ?> </small>
+                                </div>
+                                <!-- Product Description -->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label d-flex justify-content-start">Product Description</label>
                                     <div class="input-group">
-                                        <span class="input-group-text"><i class="fa-solid fa-book"></i></span>
+                                        <span class="input-group-text">
+                                            <i class="fa-solid fa-book"></i>
+                                        </span>
                                         <input type="text" name="productdescription" class="form-control" placeholder="Product Description">
                                     </div>
-                                    <?php if(form_error('productdescription')):?>
-                                        <small class="text-danger fw-bold fst-italic"><?= form_error('productdescription'); ?></small>
-                                    <?php else:?>
-                                        <label class="form-label">Product Description</label>
-                                    <?php endif;?>
-
-                                    <!-- Product Price -->
+                                    <small class="text-danger fw-bold fst-italic"> <?= form_error('productdescription'); ?> </small>
+                                </div>
+                                <!-- Product Price -->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label d-flex justify-content-start">Product Price</label>
                                     <div class="input-group">
-                                        <span class="input-group-text"><i class="fa-solid fa-tag"></i></span>
-                                        <input type="number" min="0" name="productprice" class="form-control" placeholder="Product Price">
+                                        <span class="input-group-text">
+                                            <i class="fa-solid fa-tag"></i>
+                                        </span>
+                                        <input type="number" min="0" name="productprice" class="form-control" placeholder="Product Price">                                     
                                     </div>
-                                    <?php if(form_error('productprice')):?>
-                                        <small class="text-danger fw-bold fst-italic"><?= form_error('productprice'); ?></small>
-                                    <?php else:?>
-                                        <label class="form-label">Product Price</label>
-                                    <?php endif;?>
-
-                                    <!-- Product Category -->
+                                    <small class="text-danger fw-bold fst-italic"> <?= form_error('productprice'); ?> </small>
+                                </div>
+                                <!-- Product Category -->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label d-flex justify-content-start">Choose Category</label>
                                     <div class="input-group">
                                         <label class="input-group-text" for="inputGroupSelect01">Choose Category</label>
                                         <select class="form-select" name="productcategory" id="inputGroupSelect01">
+                                            <option>High Grade</option>
                                             <option>Real Grade</option>
                                             <option>Master Grade</option>
                                             <option>Perfect Grade</option>
                                             <option>Entry Grade</option>
                                             <option>Super Deformed</option>
-                                            <option>High Resolution</option>
-                                            <option>Mega Size</option>
-                                            <option>Other Gunpla Goods</option>
                                         </select>
-                                    </div>
-                                    <label class="form-label">Product Category</label>           
+                                    </div>                                  
                                 </div>
                             </div>
                             <div class="card-footer">

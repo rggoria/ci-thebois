@@ -8,6 +8,16 @@ class Product_model extends CI_Model {
         $this->load->database();
     }
 
+    // Store Product List
+    public function store_product_list() {
+        $query = $this->db->from("product_table")->get();
+        if ($query->result() == NULL) {
+            return NULL;
+        } else {
+            return $query->result();
+        }
+    }
+
     // Admin Product Count
     public function admin_product_count() {
         $query = $this->db->from("product_table")->get();
