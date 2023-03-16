@@ -46,35 +46,27 @@
                 <div class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
                     <span><i class="fa-solid fa-cart-shopping"></i></span> My Cart
                 </div>
-                <div class="dropdown-menu dropdown-menu-end">
-                    <table class="table dropdown-item">
+                <div class="dropdown-menu dropdown-menu-lg-end p-3" style="min-width: 30rem;">
+                    <table class="table dropdown-item" id="checkoutTable">
                         <thead>
                             <tr>
-                                <th>Item No.</th>
                                 <th>Name</th>
-                                <th>Qty</th>
                                 <th>Price</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Barbatos</td>
-                                <td>5</td>
-                                <td>₱0</td>
-                            </tr>
+                            <?php foreach($cart_items as $item): ?>
+                                <tr>
+                                    <td><?= str_replace('%20',' ',$item->product_name); ?></td>
+                                    <td><?= $item->product_price ?></td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                     <div><hr class="dropdown-divider"></div>
                     <div class="dropdown-item">
-                        <table class="table">
-                            <tr>
-                                <td>Total:</td>
-                                <td>₱0</td>
-                                <td><a href="<?= site_url('Store/checkout'); ?>" class="btn btn-primary">Proceed to Checkout</a></td>
-                            </tr>
-                        </table>
+                        <a href="<?= site_url('Store/checkout'); ?>" class="btn btn-primary">Proceed to Checkout</a>
                     </div>
                 </div>
                 

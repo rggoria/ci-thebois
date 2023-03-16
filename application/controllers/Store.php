@@ -5,10 +5,9 @@ class Store extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->helper(['url', 'form']);
-        $this->load->library(['session']);
-        $this->load->library('session');
+        $this->load->library(['session', 'form_validation']);
         // Load the models
-        $this->load->model('Product_model', 'productdb');
+        $this->load->model(['Product_model' => 'productdb', 'Transaction_model' => 'transactiondb']);
 
         // Session constants
         $this->user_id = $this->session->userdata('id');
@@ -27,8 +26,9 @@ class Store extends CI_Controller {
             } elseif ($this->session->userdata('login_status') == 'COURIER') {
                 redirect('Courier');
             } else {
+                $data['cart_items'] = $this->productdb->getItems($this->user_id);
                 $this->load->view('include/store/header');
-                $this->load->view('include/store/navbar');
+                $this->load->view('include/store/navbar', $data);
                 $this->load->view('store/store_index');
                 $this->load->view('include/store/footer');
             }
@@ -37,6 +37,7 @@ class Store extends CI_Controller {
                 'logged_in' => $this->logged_in,
                 'user_id' => $this->user_id,
             );
+            $data['cart_items'] = $this->productdb->getItems($this->user_id);
             $this->load->view('include/store/header');
             $this->load->view('include/store/navbar', $data);
             $this->load->view('store/store_index');
@@ -49,6 +50,7 @@ class Store extends CI_Controller {
             'logged_in' => $this->logged_in,
             'user_id' => $this->user_id,
         );
+        $data['cart_items'] = $this->productdb->getItems($this->user_id);
         $this->load->view('include/store/header');
         $this->load->view('include/store/navbar', $data);
         
@@ -77,11 +79,87 @@ class Store extends CI_Controller {
             'logged_in' => $this->logged_in,
             'user_id' => $this->user_id,
         );
-        
+        $data['cart_items'] = $this->productdb->getItems($this->user_id);
         $this->load->view('include/store/header');
         $this->load->view('include/store/navbar', $data);
-        $this->load->view('store/store_checkout');
+        $this->load->view('store/store_checkout', $data);
         $this->load->view('include/store/footer');
-        
+    }
+
+    public function add_cart($product_id, $product_name, $price) {
+        $productData = array(
+            'user_id' => $this->user_id,
+            'product_id' => $product_id,
+            'product_name' => $product_name,            
+            'product_price' => $price,            
+            'order_status' => 'PENDING',
+        );
+        $this->productdb->insertItems($productData);
+        redirect('Store/catalog/high_grade');
+    }
+
+    public function order_fulfill() {
+        $required = "This field must not be empty";
+
+        $this->form_validation->set_rules('address', 'Complete Address', 'required', array(
+            'required' => $required
+        ));
+
+        $this->form_validation->set_rules('billing', 'Billing Address', 'required', array(
+            'required' => $required
+        ));
+
+        $this->form_validation->set_rules('contact', 'Contact Number', 'required', array(
+            'required' => $required
+        ));
+
+        if ($this->input->post('payment') == 'ewallet') {
+            $this->form_validation->set_rules('number', 'Account Number', 'required', array(
+                'required' => $required
+            ));
+    
+            $this->form_validation->set_rules('amount', 'Amount', 'required', array(
+                'required' => $required
+            ));
+        } elseif ($this->input->post('payment') == 'cod') {
+            // Nothing to put here
+        } else {
+            $this->form_validation->set_rules('payment', 'Payment Method', 'required', array(
+                'required' => $required
+            ));
+        }
+
+        // Form Validation
+        if (!$this->form_validation->run()) {
+            $this->checkout();        
+        } else {
+            // Get data from inputs
+            $cart_data = $this->productdb->getItems($this->user_id);
+            foreach($cart_data as $data) {
+                $list = array (
+                    'user_id' => $this->user_id,
+
+                    'product_id' => $data->product_id,                    
+
+                    'shipment_status' => 'FULFILL',
+
+                    'user_payment' => $this->input->post('payment'),
+                    'user_number' => $this->input->post('number'),
+                    'user_amount' => $this->input->post('amount')
+                );
+                $this->transactiondb->add_transaction($list);
+            }
+            foreach($cart_data as $data) {
+                $list = array (
+                    'order_id' => $data->order_id,
+                    'shipment_status' => 'FULFILL',
+                );
+                $this->productdb->order_fulfill($list);
+            }
+            redirect('Store/checkout');
+
+            // $this->session->set_flashdata('user_success', 'Account Successfully created');
+            // redirect('Admin/add_courier');
+        }
     }
 }

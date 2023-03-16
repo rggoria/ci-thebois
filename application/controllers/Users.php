@@ -8,6 +8,7 @@ class Users extends CI_Controller {
         $this->load->library(['session']);
         $this->load->model([
             'Users_model' => 'users',
+            'Product_model' => 'productdb',
         ]);
 
         // Session constants
@@ -31,6 +32,7 @@ class Users extends CI_Controller {
                 'email' => $this->email,
                 'logged_in' => $this->logged_in,
             );
+            $data['cart_items'] = $this->productdb->getItems($this->user_id);
             $this->load->view('include/store/header');
             $this->load->view('include/store/navbar', $data);
             $this->load->view('users/users_profile', $data);
@@ -56,11 +58,24 @@ class Users extends CI_Controller {
             'user_billing' => $billing_address,
             'user_contact' => $contact,
             'user_email' => $email,
-            'user_password' => $password
+            'user_password' => $password,
+            'user_status' => 'USER',
         );
 
         $this->users->insertUser($userData);
-        redirect('Users/profile');
+        $account = $this->users->getUser($email, $password);
+        $userSession = array(
+            'id' => $account->user_id,
+            'fullname' => $account->user_firstname . ' ' . $account->user_lastname,
+            'email' => $account->user_email,
+            'address' => $account->user_address,
+            'billing' => $account->user_billing,
+            'contact' => $account->user_contact,
+            'logged_in' => TRUE,
+        );
+        $this->session->set_userdata($userSession);
+        redirect('Users/profile/'. $account->user_id);
+
     }
 
     public function login_user() {
@@ -80,6 +95,8 @@ class Users extends CI_Controller {
             );
             $this->session->set_userdata($userSession);
             redirect('Users/profile/'. $account->user_id);
+        } else {
+            redirect('Store');
         }
     }
 
