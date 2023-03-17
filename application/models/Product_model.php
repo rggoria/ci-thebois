@@ -19,10 +19,13 @@ class Product_model extends CI_Model {
     }
 
     public function getItems($user_id) {
-        $query = $this->db->select('order_id, product_id, product_name, product_price')
-            ->get_where('order_table', array(
+        $query = $this->db->select('*')
+            ->from('order_table o')
+            ->join('product_table p', 'o.product_id = p.product_id')
+            ->where(array(
                 'user_id' => $user_id,
-                'order_status' => 'PENDING'));
+                'order_status' => 'PENDING'))
+            ->get();
         $result = $query->result();
         return $result;
     }
