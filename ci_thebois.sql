@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 16, 2023 at 03:57 PM
+-- Generation Time: Mar 17, 2023 at 05:48 PM
 -- Server version: 10.4.27-MariaDB
--- PHP Version: 7.4.33
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,8 +30,6 @@ SET time_zone = "+00:00";
 CREATE TABLE `order_table` (
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `product_name` varchar(250) NOT NULL,
-  `product_price` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `order_status` varchar(30) NOT NULL,
   `order_date` datetime NOT NULL DEFAULT current_timestamp()
@@ -41,11 +39,9 @@ CREATE TABLE `order_table` (
 -- Dumping data for table `order_table`
 --
 
-INSERT INTO `order_table` (`order_id`, `product_id`, `product_name`, `product_price`, `user_id`, `order_status`, `order_date`) VALUES
-(1, 23, 'SD%20Sangoku%20Soketsuden%20Sun%20Jian%20Gundam%20Astray', 376, 4, 'FULFILL', '2023-03-16 21:24:59'),
-(2, 24, 'SD%20Sangoku%20Soketsuden%20Liu%20Bei%20Unicorn%20Gundam', 321, 4, 'FULFILL', '2023-03-16 21:52:03'),
-(3, 19, 'HG%20Dilanza%20Sol', 799, 4, 'FULFILL', '2023-03-16 22:31:54'),
-(4, 11, 'MGEX%20Strike%20Freedom', 6930, 4, 'FULFILL', '2023-03-16 22:55:52');
+INSERT INTO `order_table` (`order_id`, `product_id`, `user_id`, `order_status`, `order_date`) VALUES
+(1, 19, 3, 'FULFILL', '2023-03-17 23:48:04'),
+(2, 17, 3, 'FULFILL', '2023-03-17 23:48:12');
 
 -- --------------------------------------------------------
 
@@ -98,44 +94,18 @@ INSERT INTO `product_table` (`product_id`, `product_image`, `product_name`, `pro
 -- --------------------------------------------------------
 
 --
--- Table structure for table `shipment_table`
---
-
-CREATE TABLE `shipment_table` (
-  `shipment_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `transaction_id` int(11) NOT NULL,
-  `shipment_status` varchar(30) NOT NULL,
-  `shipment_date` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `transaction_table`
 --
 
 CREATE TABLE `transaction_table` (
   `transaction_id` int(11) NOT NULL,
-  `shipment_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
   `shipment_status` varchar(30) NOT NULL,
   `user_payment` varchar(30) NOT NULL,
-  `user_number` int(11) NOT NULL,
-  `user_amount` int(11) NOT NULL,
-  `shipment_date` datetime NOT NULL DEFAULT current_timestamp()
+  `user_number` int(30) NOT NULL,
+  `user_amount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `transaction_table`
---
-
-INSERT INTO `transaction_table` (`transaction_id`, `shipment_id`, `user_id`, `product_id`, `shipment_status`, `user_payment`, `user_number`, `user_amount`, `shipment_date`) VALUES
-(1, 0, 4, 23, 'FULFILL', 'ewallet', 111, 111, '2023-03-16 22:19:04'),
-(2, 0, 4, 24, 'FULFILL', 'ewallet', 111, 111, '2023-03-16 22:19:04'),
-(3, 0, 4, 19, 'FULFILL', 'ewallet', 123, 123, '2023-03-16 22:53:42'),
-(4, 0, 4, 11, 'FULFILL', 'cod', 0, 0, '2023-03-16 22:56:17');
 
 -- --------------------------------------------------------
 
@@ -145,30 +115,25 @@ INSERT INTO `transaction_table` (`transaction_id`, `shipment_id`, `user_id`, `pr
 
 CREATE TABLE `user_table` (
   `user_id` int(11) NOT NULL,
-  `user_username` varchar(30) NOT NULL,
   `user_firstname` varchar(30) NOT NULL,
   `user_lastname` varchar(30) NOT NULL,
   `user_email` varchar(30) NOT NULL,
   `user_password` varchar(30) NOT NULL,
-  `user_status` varchar(30) NOT NULL DEFAULT 'INACTIVE',
-  `user_wallet` int(11) NOT NULL DEFAULT 0,
-  `user_birthday` varchar(30) NOT NULL,
   `user_contact` varchar(30) DEFAULT NULL,
   `user_address` varchar(250) NOT NULL,
   `user_billing` varchar(250) NOT NULL,
-  `user_date` datetime NOT NULL DEFAULT current_timestamp()
+  `user_status` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_table`
 --
 
-INSERT INTO `user_table` (`user_id`, `user_username`, `user_firstname`, `user_lastname`, `user_email`, `user_password`, `user_status`, `user_wallet`, `user_birthday`, `user_contact`, `user_address`, `user_billing`, `user_date`) VALUES
-(1, 'RamTheGreata', 'RamTheGreata', 'RamTheGreata', 'ramemersongoria.13.versus@gmai', 'RamTheGreata', 'DISABLE', 0, '', NULL, '', '', '2023-03-08 20:57:22'),
-(2, 'Anonymous', 'Anonymous1112121', 'Anonymous1', 'anonymous@email.com', 'Anonymous', 'ADMIN', 0, '', NULL, '', '', '2023-03-08 20:58:14'),
-(3, 'RamTheGreat1', 'RamTheGreat1', 'RamTheGreat1', 'pokemon@email.com', 'RamTheGreat1', 'USER', 0, '', NULL, '', '', '2023-03-08 20:58:49'),
-(4, 'RamTheGreat', 'RamTheGreat', 'RamTheGreat', 'ramemersongoria@yahoo.com', 'RamTheGreat', 'USER', 0, '', NULL, '', '', '2023-03-10 14:28:57'),
-(5, 'RamTheGreata1', 'hotdog1', 'hotdog1', 'ramemerson111goria@yahoo.com', 'RamTheGreata1', 'COURIER', 0, '', '1', 'RamTheGreata11', '', '2023-03-10 14:30:04');
+INSERT INTO `user_table` (`user_id`, `user_firstname`, `user_lastname`, `user_email`, `user_password`, `user_contact`, `user_address`, `user_billing`, `user_status`) VALUES
+(1, 'John', 'Doe', 'admin', 'admin', NULL, '', '', 'ADMIN'),
+(2, 'ram', 'go', 'rg', 'rg', NULL, '', '', 'COURIER'),
+(3, 'clifford', 'villanoy', 'cliff', 'cliff', '09999', 'cliff', 'cliff', 'USER'),
+(4, 'antonio', 'manila', 'aj', 'aj', '111', 'ajaj', 'ajaj', 'INVENTORY');
 
 --
 -- Indexes for dumped tables
@@ -178,7 +143,9 @@ INSERT INTO `user_table` (`user_id`, `user_username`, `user_firstname`, `user_la
 -- Indexes for table `order_table`
 --
 ALTER TABLE `order_table`
-  ADD PRIMARY KEY (`order_id`);
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `FK_Cart_User` (`user_id`),
+  ADD KEY `FK_Cart_Product` (`product_id`);
 
 --
 -- Indexes for table `product_table`
@@ -187,16 +154,11 @@ ALTER TABLE `product_table`
   ADD PRIMARY KEY (`product_id`);
 
 --
--- Indexes for table `shipment_table`
---
-ALTER TABLE `shipment_table`
-  ADD PRIMARY KEY (`shipment_id`);
-
---
 -- Indexes for table `transaction_table`
 --
 ALTER TABLE `transaction_table`
-  ADD PRIMARY KEY (`transaction_id`);
+  ADD PRIMARY KEY (`transaction_id`),
+  ADD KEY `FK_transaction_order` (`order_id`);
 
 --
 -- Indexes for table `user_table`
@@ -212,7 +174,7 @@ ALTER TABLE `user_table`
 -- AUTO_INCREMENT for table `order_table`
 --
 ALTER TABLE `order_table`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `product_table`
@@ -221,22 +183,33 @@ ALTER TABLE `product_table`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT for table `shipment_table`
---
-ALTER TABLE `shipment_table`
-  MODIFY `shipment_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `transaction_table`
 --
 ALTER TABLE `transaction_table`
-  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_table`
 --
 ALTER TABLE `user_table`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `order_table`
+--
+ALTER TABLE `order_table`
+  ADD CONSTRAINT `FK_Cart_Product` FOREIGN KEY (`product_id`) REFERENCES `product_table` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_Cart_User` FOREIGN KEY (`user_id`) REFERENCES `user_table` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `transaction_table`
+--
+ALTER TABLE `transaction_table`
+  ADD CONSTRAINT `FK_transaction_order` FOREIGN KEY (`order_id`) REFERENCES `order_table` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

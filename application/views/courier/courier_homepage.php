@@ -7,9 +7,9 @@
     <h1>Bulletin Board of Ongoing Orders</h1>
     <section class="border border-dark p-5">
         <div class="row">
-            <?php if (!$order_list == 0): ?>
-                <?php foreach($order_list as $order): ?>
-                    <?php if ($order->order_status == 'PENDING'): ?>
+            <?php if (!$transaction_list == 0): ?>
+                <?php foreach($transaction_list as $transaction): ?>
+                    <?php if ($transaction->order_status == 'FULFILL'): ?>
                         <div class="col-md-4 my-1">
                             <div class="card">
                                 <p class="card-header">Product No: <?= $order->product_id; ?></p>

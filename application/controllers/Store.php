@@ -133,24 +133,39 @@ class Store extends CI_Controller {
         } else {
             // Get data from inputs
             $cart_data = $this->productdb->getItems($this->user_id);
-            foreach($cart_data as $data) {
-                $list = array (
-                    'user_id' => $this->user_id,
-                    'order_id' => $data->order_id,                    
-                    'shipment_status' => 'FULFILL',
-                    'user_payment' => $this->input->post('payment'),
-                    'user_number' => $this->input->post('number'),
-                    'user_amount' => $this->input->post('amount'),
-                );
-                $this->transactiondb->add_transaction($list);
-            }
-            foreach($cart_data as $data) {
-                $list = array (
-                    'order_id' => $data->order_id,
-                    'shipment_status' => 'FULFILL',
-                );
-                $this->productdb->order_fulfill($list);
-            }
+            $payment = $this->input->post('payment');
+            if ($payment == 'cod') {
+                foreach($cart_data as $data) {
+                    $list = array (
+                        'user_id' => $this->user_id,
+    
+                        'order_id' => $data->order_id,                   
+    
+                        'shipment_status' => 'UNFULFILL',
+    
+                        'user_payment' => $this->input->post('payment'),
+                        'user_number' => $this->input->post('number'),
+                        'user_amount' => $data->product_price                   
+                    );                    
+                    $this->transactiondb->add_transaction($list, $this->user_id);
+                }
+            } else {
+                foreach($cart_data as $data) {
+                    $list = array (
+                        'user_id' => $this->user_id,
+    
+                        'order_id' => $data->order_id,                   
+    
+                        'shipment_status' => 'UNFULFILL',
+    
+                        'user_payment' => $this->input->post('payment'),
+                        'user_number' => $this->input->post('number'),
+                        'user_amount' => $this->input->post('amount')                    
+                    );
+                    //echo $data->product_price;
+                    $this->transactiondb->add_transaction($list, $this->user_id);
+                }
+            }            
             redirect('Store/checkout');
         }
     }
