@@ -29,8 +29,19 @@ class Transaction_model extends CI_Model {
     }
 
     // User Add Transaction
-    public function add_transaction($transactionData) {
+    public function add_transaction($transactionData, $user_id) {
         $this->db->insert('transaction_table', $transactionData);
+        $this->db->update('order_table', array('order_status'=>'FULFILL'), array('user_id'=>$user_id));
+    }
+
+    // Courier Order List
+    public function courier_order_list() {
+        $query = $this->db->from("transaction_table")->get();
+        if ($query->result() == NULL) {
+            return NULL;
+        } else {
+            return $query->result();
+        }
     }
 }
 ?>

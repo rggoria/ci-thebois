@@ -8,18 +8,23 @@ class Courier extends CI_Controller {
         // Load the models
         $this->load->model(array(
             'Courier_model' => 'courierdb',
-            'Order_model' => 'orderdb',
-            'Product_model' => 'productdb',
+            'Transaction_model' => 'transactiondb'
         ));
         // Load the helpers needed
         $this->load->helper(array('form','url'));
         // Load the libraries needed
         $this->load->library(array('form_validation', 'pagination', 'upload', 'session'));
+
+        // Session constants
+        $this->login_id = $this->session->userdata('login_id');
+        $this->login_fullname = $this->session->userdata('login_fullname');
+        $this->login_email = $this->session->userdata('login_email');
+        $this->login_password = $this->session->userdata('login_password');
     }
     public function index() {
         // Page Title
         $data['title'] = "Courier";
-        $data['order_list'] = $this->orderdb->courier_order_list();
+        $data['transaction_list'] = $this->transactiondb->courier_order_list();
         $this->load->view('include/courier/header', $data);
         $this->load->view('include/courier/navbar');
         $this->load->view('courier/courier_homepage.php');
@@ -71,7 +76,7 @@ class Courier extends CI_Controller {
             $data['user_contact'] = $this->input->post('contact');
             $data['user_address'] = $this->input->post('address');
             $data['user_password'] = $this->input->post('password');
-            $this->courierdb->update_user($id, $data);
+            $this->courierdb->update_user($id, $data);            
             $session_login = array(
                 'log_id' => $id,
                 'login_username' => $this->session->userdata('login_username'),
@@ -79,9 +84,6 @@ class Courier extends CI_Controller {
                 'login_lastname' => $this->input->post('lastname'),
                 'login_email' => $this->session->userdata('login_email'),
                 'login_password' => $this->input->post('password'),
-                'login_status' => $this->input->post('log_status'),
-                'login_contact' => $this->input->post('contact'),
-                'login_address' => $this->input->post('address')
             );
             $this->session->set_userdata($session_login);
             $this->session->set_flashdata('courier_update', 'Account Successfully Updated');  

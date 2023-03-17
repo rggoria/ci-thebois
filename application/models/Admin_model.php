@@ -9,10 +9,10 @@ class Admin_model extends CI_Model {
     }
 
     // Login Verification
-    public function login_validation($login, $password) {
+    public function login_validation($email, $password) {
         $this->db->select('*')
                 ->from('user_table')
-                ->where("(user_table.user_email = '$login' OR user_table.user_username = '$login')")
+                ->where('user_password', $email)
                 ->where('user_password', $password);
         $query = $this->db->get();
         if($query->num_rows() == 1){
