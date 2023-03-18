@@ -12,17 +12,7 @@
             <!-- Form Input -->
             <?php echo form_open('Admin/add_courier_validation'); ?>
                 <div class="form-outline mb-4">
-                    <div class="row">
-                        <!-- Username Input -->
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fa fa-user"></i></span>
-                            <input type="text" name="username" class="form-control" placeholder="Username">
-                        </div>
-                        <?php if(form_error('username')):?>
-                            <small class="text-danger fw-bold fst-italic"><?= form_error('username'); ?></small>
-                        <?php else:?>
-                            <label class="form-label">Username</label>
-                        <?php endif;?>                
+                    <div class="row">                                    
                         <!-- Firstname Input -->
                         <div class="col-md-6">
                             <div class="input-group">

@@ -12,13 +12,7 @@
             <!-- Form Input -->
             <?php echo form_open('Admin/edit_courier_validation/'.$user_data->user_id); ?>
                 <div class="form-outline mb-4">
-                    <div class="row">
-                        <!-- Username Input -->
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fa fa-user"></i></span>
-                            <input type="text" value="<?= $user_data->user_username; ?>" class="form-control" placeholder="Username" readonly>
-                        </div>
-                            <label class="form-label">Username</label>           
+                    <div class="row">                                
                         <!-- Firstname Input -->
                         <div class="col-md-6">
                             <div class="input-group">
