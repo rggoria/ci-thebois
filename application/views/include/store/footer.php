@@ -42,6 +42,9 @@
         $(document).ready( function () {
             $('#checkoutTable').DataTable();
         } );
+        $(document).ready( function () {
+            $('#transactionTable').DataTable();
+        } );
     </script>
 </body>
 </html>
