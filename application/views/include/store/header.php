@@ -12,4 +12,6 @@
     <script src="https://kit.fontawesome.com/767b1164ff.js" crossorigin="anonymous"></script>
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css">
+    <!-- LottieFiles -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>

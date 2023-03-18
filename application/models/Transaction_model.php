@@ -34,14 +34,26 @@ class Transaction_model extends CI_Model {
         $this->db->update('order_table', array('order_status'=>'FULFILL'), array('user_id'=>$user_id));
     }
 
-    // Courier Order List
-    public function courier_order_list() {
-        $query = $this->db->from("transaction_table")->get();
+    // Transaction List
+    public function transaction_list() {
+        $query = $this->db->from("user_table")->get();
         if ($query->result() == NULL) {
             return NULL;
         } else {
             return $query->result();
         }
+    }
+
+    // Courier Transaction List
+    public function courier_transaction_list() {
+        $query = $this->db->select('*')
+            ->from('transaction_table t')
+            ->join('user_table u', 't.user_id = u.user_id')
+            ->join('order_table o', 't.order_id = o.order_id')
+            ->join('product_table p', 'o.product_id = p.product_id')
+            ->get();
+        $result = $query->result();
+        return $result;
     }
 }
 ?>

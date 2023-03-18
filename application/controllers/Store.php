@@ -96,6 +96,11 @@ class Store extends CI_Controller {
         redirect('Store/catalog/high_grade');
     }
 
+    public function remove_cart($order_id) {
+        $this->productdb->removeItems($this->user_id, $order_id);
+        redirect('Store/checkout');
+    }
+
     public function order_fulfill() {
         $required = "This field must not be empty";
 
@@ -116,7 +121,7 @@ class Store extends CI_Controller {
                 'required' => $required
             ));
     
-            $this->form_validation->set_rules('amount', 'Amount', 'required', array(
+            $this->form_validation->set_rules('amount', 'Amount', 'required|callback_amount_check', array(
                 'required' => $required
             ));
         } elseif ($this->input->post('payment') == 'cod') {
@@ -125,10 +130,11 @@ class Store extends CI_Controller {
             $this->form_validation->set_rules('payment', 'Payment Method', 'required', array(
                 'required' => $required
             ));
-        }
+        }       
 
         // Form Validation
         if (!$this->form_validation->run()) {
+            $this->session->set_flashdata('cart_error', 'Payment not processed');
             $this->checkout();        
         } else {
             // Get data from inputs
@@ -145,28 +151,45 @@ class Store extends CI_Controller {
     
                         'user_payment' => $this->input->post('payment'),
                         'user_number' => $this->input->post('number'),
-                        'user_amount' => $data->product_price                   
+                        'user_amount' => $data->product_price
                     );                    
                     $this->transactiondb->add_transaction($list, $this->user_id);
                 }
             } else {
                 foreach($cart_data as $data) {
                     $list = array (
-                        'user_id' => $this->user_id,
-    
+                            'user_id' => $this->user_id,
+        
                         'order_id' => $data->order_id,                   
     
                         'shipment_status' => 'UNFULFILL',
     
                         'user_payment' => $this->input->post('payment'),
                         'user_number' => $this->input->post('number'),
-                        'user_amount' => $this->input->post('amount')                    
-                    );
+                        'user_amount' => $data->product_price
+                    );  
                     //echo $data->product_price;
                     $this->transactiondb->add_transaction($list, $this->user_id);
+    
                 }
-            }            
+            }
+            $this->session->set_flashdata('cart_success', 'Payment complete');
             redirect('Store/checkout');
         }
+    }
+
+    public function amount_check($number) {
+        $cart_items = $this->productdb->getItems($this->user_id);
+
+        $total = 0;
+        foreach($cart_items as $items) {
+            $total += $items->product_price;
+        }
+
+        if ($number != $total) {            
+            $this->form_validation->set_message('amount_check', 'Input the exact total amount');        
+            return false;
+        }
+        return true;
     }
 }

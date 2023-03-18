@@ -33,7 +33,9 @@
                                        <h5 class="card-title"><?= $product->product_name; ?></h5>
                                        <span class="badge text-bg-warning">Limited Stock</span>
                                        <p class="fw-bold">Pricing: <?= number_format($product->product_price,2) ?></p>
-                                       <a href="<?= site_url('Store/add_cart/' . $product->product_id . '/' . $product->product_name . '/' . $product->product_price); ?>" class="btn btn-outline-primary">Add to Cart</a>
+                                       <?php if ($this->logged_in): ?>
+                                          <a href="<?= site_url('Store/add_cart/' . $product->product_id . '/' . $product->product_name . '/' . $product->product_price); ?>" class="btn btn-outline-primary">Add to Cart</a>
+                                       <?php endif; ?>                                       
                                     </div>
                                  </div>
                               </div>

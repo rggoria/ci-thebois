@@ -6,18 +6,20 @@
                 <div class="mb-2">
                     <label class="form-label">Complete Address</label>
                     <input type="text" name="address" id="" class="form-control" value="<?= $this->address; ?>">
+                    <input type="text" name="address" id="" class="form-control" value="<?= $this->address; ?>">
                     <small class="text-danger fw-bold fst-italic"> <?= form_error('address'); ?> </small>
                 </div>
 
                 <div class="mb-2">
                     <label class="form-label">Billing Address</label>
                     <input type="text" name="billing" id="" class="form-control" value="<?= $this->billing; ?>">
+                    <input type="text" name="billing" id="" class="form-control" value="<?= $this->billing; ?>">
                     <small class="text-danger fw-bold fst-italic"> <?= form_error('billing'); ?> </small>
                 </div>
 
                 <div class="mb-2">
                     <label class="form-label">Contact Number</label>
-                    <input type="text" name="contact" id="" class="form-control" value="<?= $this->contact; ?>">
+                    <input type="number" name="contact" id="" class="form-control" value="<?= $this->contact; ?>">
                     <small class="text-danger fw-bold fst-italic"> <?= form_error('contact'); ?> </small>
                 </div>
 
@@ -37,12 +39,12 @@
                             <div class="collapse" id="onlinetransaction">
                                 <div class="mb-2">
                                     <label class="form-label">Account Number</label>
-                                    <input type="text" name="number" id="" class="form-control">
+                                    <input type="number" name="number" id="" class="form-control">
                                     <small class="text-danger fw-bold fst-italic"> <?= form_error('number'); ?> </small>
                                 </div>
                                 <div class="mb-2">
                                     <label class="form-label">Amount</label>
-                                    <input type="text" name="amount" id="" class="form-control">
+                                    <input type="number" name="amount" id="" class="form-control">
                                     <small class="text-danger fw-bold fst-italic"> <?= form_error('amount'); ?> </small>
                                 </div>
                             </div>
@@ -57,10 +59,10 @@
                     </div>
                 </div>
                 
-                <p class="text-wrap" style="font-size: 6px;">Note: *Please take note that all purchases are final and non-refundable.
+                <p class="text-wrap" style="font-size: 8px;">Note: *Please take note that all purchases are final and non-refundable.
                 We highly encourage our users to carefully review their orders and ensure that all items are correct and meet their expectations before proceeding with the transaction.
                 We want to ensure that our customers are fully satisfied with their purchases, and thus we advise everyone to make a final decision before completing their order.</p>
-                <div class="text-end">
+                <div class="text-end mb-2">
                     <button type="submit" class="btn btn-primary">Continue to Payment</button>
                 </div>
             <?php form_close(); ?>
@@ -69,17 +71,39 @@
             <div class="card">
                 <div class="card-header">My Cart</div>
                 <div class="card-body">
-                    <ul class="list-group list-group-flush">
+                    <!-- <ul class="list-group list-group-flush">
                         <?php if($cart_items == NULL): ?>
                             <li class="list-group-item">No Items found</li>
                         <?php else: ?>
                             <?php foreach($cart_items as $items): ?>
                                 <li class="list-group-item">
+                                    <img src="<?= base_url('resources/images/product/'.$items->product_image);?>" class="border border-dark" alt="..." width="50" >
                                     <?= str_replace('%20',' ',$items->product_name); ?>                                    
                                 </li>
                             <?php endforeach; ?>
                         <?php endif; ?>
-                    </ul>
+                    </ul> -->
+                    <div class="table-responsive p-0">
+                        <table class="table">                            
+                            <?php if($cart_items == NULL): ?>
+                                <tr>
+                                    <td>No Items found</td>                             
+                                </tr>                                                             
+                            <?php else: ?>
+                                <?php foreach($cart_items as $items): ?>
+                                    <tr>
+                                        <td scope="row">
+                                            <img src="<?= base_url('resources/images/product/'.$items->product_image);?>" class="border border-dark" alt="..." width="50" >
+                                            <?= str_replace('%20',' ',$items->product_name); ?>   
+                                        </td>
+                                        <td>
+                                            <a href="<?= site_url('Store/remove_cart/' . $items->order_id); ?>" class="btn btn-danger">Remove</a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php endif; ?>                     
+                        </table>
+                    </div>                                 
                 </div>
             </div>
 
@@ -104,3 +128,50 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<?php if ($this->session->flashdata('cart_success')): ?>
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center p-1 m-3">
+                        <div class="text-center">
+                            <div class="d-flex justify-content-center">                                
+                                <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_gaxn5gzy.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;"  loop  autoplay></lottie-player>
+                            </div>
+                            <h1><?= $this->session->flashdata('cart_success'); ?></h1>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+<?php elseif ($this->session->flashdata('cart_error')): ?>
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center p-1 m-3">
+                        <div class="text-center">
+                            <div class="d-flex justify-content-center">                                
+                                <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_ucaemjwr.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;"  loop  autoplay></lottie-player>
+                            </div>
+                            <h1><?= $this->session->flashdata('cart_error'); ?></h1>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif ?>
+
+<script>
+    var myModal = document.getElementById('successModal');
+    // Determine when to show the modal
+    document.addEventListener('DOMContentLoaded', function() {
+        var myModal = document.getElementById('successModal');
+        var modal = new bootstrap.Modal(myModal);
+        modal.show();
+    });
+</script>
