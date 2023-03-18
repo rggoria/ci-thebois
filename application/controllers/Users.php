@@ -105,5 +105,28 @@ class Users extends CI_Controller {
     public function logout() {
         $this->session->sess_destroy();
         redirect('Store');
-    }   
+    }
+
+    public function edit_profile($user_id) {
+        $current_account = $this->users->getUserByID($user_id);
+        $address = $this->input->post('address');
+        $contact = $this->input->post('contact');
+        $billing = $this->input->post('billing');
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+
+        if ($password == ""){
+            $password = $current_account->user_password;
+        } 
+
+        $userData = array(
+            'user_address' => $address,
+            'user_contact' => $contact,
+            'user_billing' => $billing,
+            'user_email' => $email,
+            'user_password' => $password,
+        );
+        print_r($userData);
+        $this->users->updateUser($userData, $user_id);
+    }
 }

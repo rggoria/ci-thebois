@@ -9,11 +9,18 @@ class Courier extends CI_Controller {
         $this->load->model(array(
             'Courier_model' => 'courierdb',
             'Transaction_model' => 'transactiondb'
+            'Transaction_model' => 'transactiondb'
         ));
         // Load the helpers needed
         $this->load->helper(array('form','url'));
         // Load the libraries needed
         $this->load->library(array('form_validation', 'pagination', 'upload', 'session'));
+
+        // Session constants
+        $this->login_id = $this->session->userdata('login_id');
+        $this->login_fullname = $this->session->userdata('login_fullname');
+        $this->login_email = $this->session->userdata('login_email');
+        $this->login_password = $this->session->userdata('login_password');
 
         // Session constants
         $this->login_id = $this->session->userdata('login_id');
@@ -73,6 +80,7 @@ class Courier extends CI_Controller {
             $data['user_contact'] = $this->input->post('contact');
             $data['user_address'] = $this->input->post('address');
             $data['user_password'] = $this->input->post('password');
+            $this->courierdb->update_user($id, $data);            
             $this->courierdb->update_user($id, $data);            
             $session_login = array(
                 'log_id' => $id,

@@ -89,9 +89,7 @@ class Store extends CI_Controller {
     public function add_cart($product_id, $product_name, $price) {
         $productData = array(
             'user_id' => $this->user_id,
-            'product_id' => $product_id,
-            'product_name' => $product_name,            
-            'product_price' => $price,            
+            'product_id' => $product_id,                    
             'order_status' => 'PENDING',
         );
         $this->productdb->insertItems($productData);
@@ -177,9 +175,6 @@ class Store extends CI_Controller {
             }
             $this->session->set_flashdata('cart_success', 'Payment complete');
             redirect('Store/checkout');
-
-            // $this->session->set_flashdata('user_success', 'Account Successfully created');
-            // redirect('Admin/add_courier');
         }
     }
 

@@ -6,11 +6,13 @@
                 <div class="mb-2">
                     <label class="form-label">Complete Address</label>
                     <input type="text" name="address" id="" class="form-control" value="<?= $this->address; ?>">
+                    <input type="text" name="address" id="" class="form-control" value="<?= $this->address; ?>">
                     <small class="text-danger fw-bold fst-italic"> <?= form_error('address'); ?> </small>
                 </div>
 
                 <div class="mb-2">
                     <label class="form-label">Billing Address</label>
+                    <input type="text" name="billing" id="" class="form-control" value="<?= $this->billing; ?>">
                     <input type="text" name="billing" id="" class="form-control" value="<?= $this->billing; ?>">
                     <small class="text-danger fw-bold fst-italic"> <?= form_error('billing'); ?> </small>
                 </div>
