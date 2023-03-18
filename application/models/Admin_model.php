@@ -10,16 +10,11 @@ class Admin_model extends CI_Model {
 
     // Login Verification
     public function login_validation($email, $password) {
-        $this->db->select('*')
-                ->from('user_table')
-                ->where('user_password', $email)
-                ->where('user_password', $password);
-        $query = $this->db->get();
-        if($query->num_rows() == 1){
-            return $query->row();
-        }else{
-            return FALSE;
-        }
+        $query = $this->db->get_where('user_table', array(
+            'user_email' => $email,
+            'user_password' => $password
+        ));
+        return $query->row();
     }
 
     // Admin User Count

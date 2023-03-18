@@ -5,8 +5,8 @@
 				<div class="card mb-4">
 					<div class="card-body text-center">
 						<i class="fa fa-user-circle fa-5x"></i>
-						<h5 class="my-3"><?= $this->session->userdata('login_username'); ?></h5>
-						<h3 class="my-3 text-muted"><?= $this->session->userdata('login_email'); ?></h3>
+						<h5 class="my-3"><?= $this->login_fullname; ?></h5>
+						<h3 class="my-3 text-muted"><?= $this->login_email; ?></h3>
 						<p class="text-muted mb-1">Courier</p>
 						<p class="text-muted mb-4">Gundam Corp.</p>
 					</div>
@@ -70,7 +70,7 @@
 									<span class="input-group-text col-sm-2"><p class="mb-0">Password:</p></i></span>
 									<input type="text" name="password" class="form-control" placeholder="Enter Password..." value="<?= $this->session->userdata('login_password'); ?>">
 								</div>
-								<?php if(form_error('address')):?>
+								<?php if(form_error('password')):?>
 									<small class="text-danger fw-bold fst-italic"><?= form_error('password'); ?></small>
 								<?php endif;?>
 							</div>

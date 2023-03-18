@@ -9,7 +9,7 @@
                 <a href="<?= site_url('Courier'); ?>" class="nav-link">Shipment</a>
             </li>
             <li class="nav-item">
-                <a href="<?= site_url('Courier/courier_profile') ?>" class="nav-link"><?= $this->login_fullname; ?></a>
+                <a href="<?= site_url('Courier/courier_profile') ?>" class="nav-link">Profile</a>
             </li>
             <li class="nav-item">
                 <a href="<?= site_url('Courier/logout') ?>" class="nav-link">Logout</a>

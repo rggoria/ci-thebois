@@ -24,7 +24,8 @@ class Courier extends CI_Controller {
     public function index() {
         // Page Title
         $data['title'] = "Courier";
-        $data['transaction_list'] = $this->transactiondb->courier_order_list();
+        $data['courier_transaction_list'] = $this->transactiondb->courier_transaction_list();
+        
         $this->load->view('include/courier/header', $data);
         $this->load->view('include/courier/navbar');
         $this->load->view('courier/courier_homepage.php');
@@ -56,17 +57,13 @@ class Courier extends CI_Controller {
             'numeric' => 'Numeric inputs only'
         ));
 
-        $this->form_validation->set_rules('address', 'Address', 'regex_match[/^[a-zA-Z].*[\s\.]*$/]', array(
-            'regex_match' => $regex_match
-        ));
-
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[8]', array(
             'required' => $required,
             'min_length' => 'Must contain at least 8 characters'
         ));
         
         // Form Validation
-        if (!$this->form_validation->run()) {
+        if (!$this->form_validation->run()) {        
             $this->courier_profile();
         } else {
             // Get data from inputs
@@ -82,6 +79,8 @@ class Courier extends CI_Controller {
                 'login_username' => $this->session->userdata('login_username'),
                 'login_firstname' => $this->input->post('firstname'),
                 'login_lastname' => $this->input->post('lastname'),
+                'login_contact' => $this->input->post('contact'),
+                'login_address' => $this->input->post('address'),
                 'login_email' => $this->session->userdata('login_email'),
                 'login_password' => $this->input->post('password'),
             );
@@ -91,21 +90,21 @@ class Courier extends CI_Controller {
         }
     }
 
-    public function reserved_order($id) {
+    public function reserved_transaction($id) {        
         $reserved_id = $this->session->userdata('login_id');
-        $this->courierdb->courier_reserved_order($id, $reserved_id);
+        $this->courierdb->courier_reserved_transaction($id, $reserved_id);
         $this->session->set_flashdata('order_reserve', 'Order is now reserved');
         $this->index();
     }
 
-    public function delivered_order($id) {
-        $this->courierdb->courier_delivered_order($id);
+    public function delivered_transaction($id) {
+        $this->courierdb->courier_delivered_transaction($id);
         $this->session->set_flashdata('order_delivered', 'Order is now delivered');
         $this->index();
     }
 
-    public function cancelled_order($id) {
-        $this->courierdb->courier_cancelled_order($id);
+    public function cancelled_transaction($id) {
+        $this->courierdb->courier_cancelled_transaction($id);
         $this->session->set_flashdata('order_cancelled', 'Order is now cancelled');
         $this->index();
     }

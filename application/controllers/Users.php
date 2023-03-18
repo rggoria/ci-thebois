@@ -9,6 +9,7 @@ class Users extends CI_Controller {
         $this->load->model([
             'Users_model' => 'users',
             'Product_model' => 'productdb',
+            'Transaction_model' => 'transactiondb'
         ]);
 
         // Session constants
@@ -33,6 +34,7 @@ class Users extends CI_Controller {
                 'logged_in' => $this->logged_in,
             );
             $data['cart_items'] = $this->productdb->getItems($this->user_id);
+            $data['transaction_list'] = $this->transactiondb->transaction_list($this->user_id);
             $this->load->view('include/store/header');
             $this->load->view('include/store/navbar', $data);
             $this->load->view('users/users_profile', $data);
@@ -103,5 +105,5 @@ class Users extends CI_Controller {
     public function logout() {
         $this->session->sess_destroy();
         redirect('Store');
-    }
+    }   
 }

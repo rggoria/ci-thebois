@@ -69,23 +69,18 @@
 
                     <h5>Transaction History</h5>
                     <table class="table">
-                        <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Price</th>
+                        </tr>
+                        <?php foreach($transaction_list  as $item): ?>
                             <tr>
                                 <th>Order No.</th>
-                                <th>Product Name</th>
-                                <th>Qty</th>
-                                <th>Price</th>
+                                <td></td>
+                                <td></td>
                             </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Barbatos</td>
-                                <td>50</td>
-                                <td>500</td>
-                            </tr>
-                        </tbody>
+                        <?php endforeach; ?>
                     </table>
                 </div>
             </div>
