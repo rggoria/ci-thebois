@@ -16,11 +16,19 @@ class Admin extends CI_Controller {
         $this->load->helper(array('form','url'));
         // Load the libraries needed
         $this->load->library(array('form_validation', 'pagination', 'upload', 'session'));
+
+        // Session constants
+        $this->login_id = $this->session->userdata('login_id');
+        $this->login_fullname = $this->session->userdata('login_fullname');
+        $this->login_email = $this->session->userdata('login_email');
+        $this->login_password = $this->session->userdata('login_password');
     }
     public function index() {
         if ($this->session->userdata('login_status')) {
             if ($this->session->userdata('login_status') == 'ADMIN') {
                 redirect('Admin/homepage');
+            } elseif ($this->session->userdata('login_status') == 'INVENTORY') {
+                redirect('Admin/inventory');
             } elseif ($this->session->userdata('login_status') == 'COURIER') {
                 redirect('Courier');
             } else {
@@ -44,10 +52,9 @@ class Admin extends CI_Controller {
     // Start Login Functions //
     public function login_validation() {
         $required = "This field is required";
-        $login = $this->input->post('login');
+        $login = $this->input->post('email');
         $password = $this->input->post('password');
-
-        $this->form_validation->set_rules('login', 'Email or Username', 'required', 'required', $required);
+        $this->form_validation->set_rules('email', 'Email', 'required', 'required', $required);
         $this->form_validation->set_rules('password', 'Password', 'required', 'required', $required);
         // Form Validation
         if(!$this->form_validation->run())
@@ -58,24 +65,32 @@ class Admin extends CI_Controller {
                 if ($account->user_status == 'ADMIN') {
                     $session_login = array(
                         'login_id' => $account->user_id,
-                        'login_username' => $account->user_username,
+                        'login_fullname' => $account->user_firstname . ' ' . $account->user_lastname,
                         'login_email' => $account->user_email,
                         'login_password' => $account->user_password,
                         'login_status' => $account->user_status
                     );
                     $this->session->set_userdata($session_login);
                     redirect('Admin/homepage');
+                } elseif ($account->user_status == 'INVENTORY') {
+                    $session_login = array(
+                        'login_id' => $account->user_id,              
+                        'login_fullname' => $account->user_firstname . ' ' . $account->user_lastname,                        
+                        'login_email' => $account->user_email,
+                        'login_password' => $account->user_password,
+                        'login_status' => $account->user_status                        
+                    );
+                    $this->session->set_userdata($session_login);
+                    redirect('Admin/inventory');
                 } elseif ($account->user_status == 'COURIER') {
                     $session_login = array(
-                        'login_id' => $account->user_id,
-                        'login_username' => $account->user_username,
+                        'login_id' => $account->user_id,              
+                        'login_fullname' => $account->user_firstname . ' ' . $account->user_lastname,
                         'login_firstname' => $account->user_firstname,
                         'login_lastname' => $account->user_lastname,
                         'login_email' => $account->user_email,
                         'login_password' => $account->user_password,
-                        'login_status' => $account->user_status,
-                        'login_contact' => $account->user_contact,
-                        'login_address' => $account->user_address
+                        'login_status' => $account->user_status                        
                     );
                     $this->session->set_userdata($session_login);
                     redirect('Courier');
@@ -110,6 +125,17 @@ class Admin extends CI_Controller {
         $data['transaction_list'] = $this->transactiondb->admin_transaction_list();
         $this->load->view('include/admin/header', $data);
         $this->load->view('admin/admin_homepage');
+        $this->load->view('include/admin/footer');
+    }
+
+    public function inventory() {
+        // Page Title
+        $data['title'] = "Inventory";
+
+        $data['product_count'] = $this->productdb->admin_product_count();
+        $data['product_list'] = $this->productdb->admin_product_list();
+        $this->load->view('include/admin/header', $data);
+        $this->load->view('admin/inventory_homepage');
         $this->load->view('include/admin/footer');
     }
 

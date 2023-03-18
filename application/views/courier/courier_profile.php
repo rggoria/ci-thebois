@@ -4,7 +4,7 @@
 			<div class="col-lg-13">
 				<div class="card mb-4">
 					<div class="card-body text-center">
-						<img src="https://www.seekpng.com/png/detail/41-410093_circled-user-icon-user-profile-icon-png.png" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+						<i class="fa fa-user-circle fa-5x"></i>
 						<h5 class="my-3"><?= $this->session->userdata('login_username'); ?></h5>
 						<h3 class="my-3 text-muted"><?= $this->session->userdata('login_email'); ?></h3>
 						<p class="text-muted mb-1">Courier</p>
@@ -71,7 +71,7 @@
 									<input type="text" name="password" class="form-control" placeholder="Enter Password..." value="<?= $this->session->userdata('login_password'); ?>">
 								</div>
 								<?php if(form_error('address')):?>
-									<small class="text-danger fw-bold fst-italic"><?= form_error('address'); ?></small>
+									<small class="text-danger fw-bold fst-italic"><?= form_error('password'); ?></small>
 								<?php endif;?>
 							</div>
 							
