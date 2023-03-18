@@ -46,7 +46,8 @@
                 <div class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
                     <span><i class="fa-solid fa-cart-shopping"></i></span> My Cart
                 </div>
-                <div class="dropdown-menu dropdown-menu-lg-end p-3" style="min-width: 30rem;">
+                <!-- <div class="dropdown-menu dropdown-menu-lg-end p-3" style="min-width: 30rem;"> -->
+                <div class="dropdown-menu dropdown-menu-lg-end p-3">
                     <table class="table dropdown-item" id="checkoutTable">
                         <thead>
                             <tr>

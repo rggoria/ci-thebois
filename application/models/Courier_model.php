@@ -12,23 +12,23 @@ class Courier_model extends CI_Model {
         $this->db->update('user_table', $data, array('user_id' => $id));
     }
 
-    public function courier_reserved_order($id, $reserved_id) {
-        $this->db->where('order_id', $id);
+    public function courier_reserved_transaction($id, $reserved_id) {       
+        $this->db->where('transaction_id', $id);
         $data = array(
-            'order_status' => 'RESERVED',
-            'order_reserved_id' => $reserved_id,
+            'shipment_status' => 'RESERVED',
+            'transaction_reserved_id' => $reserved_id,
         );
-        $this->db->update('order_table', $data); 
+        $this->db->update('transaction_table', $data); 
     }
     
-    public function courier_delivered_order($id) {
-        $this->db->where('order_id', $id);
-        $this->db->update('order_table', array('order_status' => 'DELIVERED')); 
+    public function courier_delivered_transaction($id) {
+        $this->db->where('transaction_id', $id);
+        $this->db->update('transaction_table', array('shipment_status' => 'DELIVERED')); 
     }
 
-    public function courier_cancelled_order($id) {
-        $this->db->where('order_id', $id);
-        $this->db->update('order_table', array('order_status' => 'CANCELLED')); 
+    public function courier_cancelled_transaction($id) {
+        $this->db->where('transaction_id', $id);
+        $this->db->update('transaction_table', array('shipment_status' => 'CANCELLED')); 
     }
 }
 ?>

@@ -34,6 +34,14 @@ class Product_model extends CI_Model {
         $this->db->insert('order_table', $productData);
     }
 
+    public function removeItems($user_id, $order_id) {
+        $this->db->where(
+            'order_id', $order_id,
+            'user_id', $user_id
+        );
+        $this->db->update('order_table', array('order_status' => 'CANCELLED'));
+    }
+
     // Shopping Cart Order Fulfill
     public function order_fulfill($data) {
         extract($data);
