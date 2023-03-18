@@ -29,8 +29,10 @@ class Transaction_model extends CI_Model {
     }
 
     // User Add Transaction
-    public function add_transaction($transactionData) {
-        $this->db->insert('transaction_table', $transactionData);
-    }
+    // public function add_transaction($transactionData) {
+    //     $this->db->insert('transaction_table', $transactionData);
+    //     $this->db->update('product_table', array(
+    //         'shipment'))
+    // }
 }
 ?>
