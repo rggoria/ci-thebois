@@ -126,5 +126,6 @@ class Users extends CI_Controller {
         );
         print_r($userData);
         $this->users->updateUser($userData, $user_id);
+        redirect('Users/profile/'.$user_id);
     }
 }
