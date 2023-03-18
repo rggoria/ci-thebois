@@ -34,7 +34,7 @@ class Users extends CI_Controller {
                 'logged_in' => $this->logged_in,
             );
             $data['cart_items'] = $this->productdb->getItems($this->user_id);
-            $data['transaction_list'] = $this->transactiondb->transaction_list($this->user_id);
+            $data['transaction_list'] = $this->users->getTransactions($user_id);
             $this->load->view('include/store/header');
             $this->load->view('include/store/navbar', $data);
             $this->load->view('users/users_profile', $data);
@@ -128,5 +128,6 @@ class Users extends CI_Controller {
         );
         print_r($userData);
         $this->users->updateUser($userData, $user_id);
+        redirect('Users/profile/'.$user_id);
     }
 }

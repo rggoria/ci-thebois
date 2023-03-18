@@ -67,19 +67,28 @@
                     <hr>
 
                     <h5>Transaction History</h5>
-                    <table class="table">
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Price</th>
-                            <th>Price</th>
-                        </tr>
-                        <?php foreach($transaction_list  as $item): ?>
+                    <table class="table" id="transactionTable">
+                        <thead>
                             <tr>
-                                <th>Order No.</th>
-                                <td></td>
-                                <td></td>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Shipment Status</th>
+                                <th>Payment Method</th>
+                                <th>Amount Paid</th>
                             </tr>
-                        <?php endforeach; ?>
+                        </thead>
+                        
+                        <tbody>
+                            <?php foreach($transaction_list  as $item): ?>
+                                <tr>
+                                    <td><?= $item->product_name ?></td>
+                                    <td><?= $item->product_price ?></td>
+                                    <td><?= $item->shipment_status ?></td>
+                                    <td><?= $item->user_payment ?></td>
+                                    <td>₱ <?= number_format($item->user_amount,2) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
                     </table>
                 </div>
             </div>

@@ -29,5 +29,17 @@ class Users_model extends CI_Model {
     public function updateUser($userData, $user_id) {
         $this->db->update('user_table', $userData, array('user_id' => $user_id));
     }
+
+    public function getTransactions($user_id) {
+        $query = $this->db->select('*')
+            ->from('transaction_table t')
+            ->join('user_table u', 't.user_id = u.user_id')
+            ->join('order_table o', 't.order_id = o.order_id')
+            ->join('product_table p', 'o.product_id = p.product_id')
+            ->where(array('t.user_id' => $user_id))
+            ->get();
+        $result = $query->result();
+        return $result;
+    }
 }
 ?>
