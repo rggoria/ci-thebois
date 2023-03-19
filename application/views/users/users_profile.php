@@ -84,8 +84,8 @@
                                     <td><?= $item->product_name ?></td>
                                     <td><?= $item->product_price ?></td>
                                     <td><?= $item->shipment_status ?></td>
-                                    <td><?= $item->user_paymethod ?></td>
-                                    <td><?= $item->user_amount ?></td>
+                                    <td><?= $item->user_payment ?></td>
+                                    <td>₱ <?= number_format($item->user_amount,2) ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
