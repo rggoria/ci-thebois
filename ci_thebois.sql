@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 17, 2023 at 05:48 PM
+-- Generation Time: Mar 19, 2023 at 01:55 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -104,8 +104,17 @@ CREATE TABLE `transaction_table` (
   `shipment_status` varchar(30) NOT NULL,
   `user_payment` varchar(30) NOT NULL,
   `user_number` int(30) NOT NULL,
-  `user_amount` int(11) NOT NULL
+  `user_amount` int(11) NOT NULL,
+  `transaction_reserved_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `transaction_table`
+--
+
+INSERT INTO `transaction_table` (`transaction_id`, `user_id`, `order_id`, `shipment_status`, `user_payment`, `user_number`, `user_amount`, `transaction_reserved_id`) VALUES
+(1, 3, 1, 'UNFULFILL', 'ewallet', 1, 799, 0),
+(2, 3, 2, 'UNFULFILL', 'ewallet', 1, 499, 0);
 
 -- --------------------------------------------------------
 
@@ -130,10 +139,10 @@ CREATE TABLE `user_table` (
 --
 
 INSERT INTO `user_table` (`user_id`, `user_firstname`, `user_lastname`, `user_email`, `user_password`, `user_contact`, `user_address`, `user_billing`, `user_status`) VALUES
-(1, 'John', 'Doe', 'admin', 'admin', NULL, '', '', 'ADMIN'),
-(2, 'ram', 'go', 'rg', 'rg', NULL, '', '', 'COURIER'),
-(3, 'clifford', 'villanoy', 'cliff', 'cliff', '09999', 'cliff', 'cliff', 'USER'),
-(4, 'antonio', 'manila', 'aj', 'aj', '111', 'ajaj', 'ajaj', 'INVENTORY');
+(1, 'Big', 'Brother', 'admin@gmail.com', 'admin', NULL, '', '', 'ADMIN'),
+(2, 'Ram Emerson', 'Goria', 'ramgoria@gmail.com', 'ramemerson', '', '', '', 'COURIER'),
+(3, 'Napoleon', 'Berganio', 'naps@gmail.com', 'napoleon', '099987654', 'Cubao, Anonas', 'Cubao, Anonas', 'USER'),
+(4, 'Antonio', 'Manila', 'aj@gmail.com', 'antonio', '0912345', 'Ermita, Manila', 'Ermita, Manila', 'INVENTORY');
 
 --
 -- Indexes for dumped tables
@@ -186,7 +195,7 @@ ALTER TABLE `product_table`
 -- AUTO_INCREMENT for table `transaction_table`
 --
 ALTER TABLE `transaction_table`
-  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_table`
