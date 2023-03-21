@@ -28,14 +28,26 @@ class Courier extends CI_Controller {
         $this->login_password = $this->session->userdata('login_password');
     }
     public function index() {
-        // Page Title
-        $data['title'] = "Courier";
-        $data['courier_transaction_list'] = $this->transactiondb->courier_transaction_list();
-        
-        $this->load->view('include/courier/header', $data);
-        $this->load->view('include/courier/navbar');
-        $this->load->view('courier/courier_homepage.php');
-        $this->load->view('include/courier/footer');
+        if ($this->session->userdata('login_status')) {
+            if ($this->session->userdata('login_status') == 'ADMIN') {
+                redirect('Admin/homepage');
+            } elseif ($this->session->userdata('login_status') == 'INVENTORY') {
+                redirect('Admin/inventory');
+            } else {
+                // Page Title
+                $data['title'] = "Courier";
+                $data['courier_transaction_list'] = $this->transactiondb->courier_transaction_list();
+                
+                $this->load->view('include/courier/header', $data);
+                $this->load->view('include/courier/navbar');
+                $this->load->view('courier/courier_homepage.php');
+                $this->load->view('include/courier/footer');    
+            }
+        } elseif ($this->session->userdata('logged_in') == 1) {
+            redirect('Store');
+        } else {
+            redirect('Admin');
+        }
     }
 
     public function courier_profile() {

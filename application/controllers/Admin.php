@@ -31,8 +31,6 @@ class Admin extends CI_Controller {
                 redirect('Admin/inventory');
             } elseif ($this->session->userdata('login_status') == 'COURIER') {
                 redirect('Courier');
-            } elseif ($this->session->userdata('login_status') == 'USER') {
-                redirect('Store');
             } else {
                 // Page Title
                 $data['title'] = "Admin: Login";
@@ -41,6 +39,8 @@ class Admin extends CI_Controller {
                 $this->load->view('admin/admin_login');
                 $this->load->view('include/admin/footer');
             }
+        } elseif ($this->session->userdata('logged_in') == 1) {
+            redirect('Store');
         } else {
             // Page Title
             $data['title'] = "Admin: Login";
@@ -115,32 +115,61 @@ class Admin extends CI_Controller {
 
     // Start Homepage Functions //
     public function homepage() {
-        // Page Title
-        $data['title'] = "Admin";
+        if ($this->session->userdata('login_status')) {
+            if ($this->session->userdata('login_status') == 'INVENTORY') {
+                redirect('Admin/inventory');
+            } elseif ($this->session->userdata('login_status') == 'USER') {
+                redirect('Store');
+            } elseif ($this->session->userdata('login_status') == 'COURIER') {
+                redirect('Courier');
+            } else {
+                // Page Title
+                $data['title'] = "Admin";
 
-        // Fetch Data Count
-        $data['user_count'] = $this->admindb->admin_user_count();
-        $data['user_list'] = $this->admindb->admin_user_list();
-        $data['order_count'] = $this->orderdb->admin_order_count();
-        $data['order_list'] = $this->orderdb->admin_order_list();
-        $data['product_count'] = $this->productdb->admin_product_count();
-        $data['product_list'] = $this->productdb->admin_product_list();
-        $data['transaction_count'] = $this->transactiondb->admin_transaction_count();
-        $data['transaction_list'] = $this->transactiondb->admin_transaction_list();
-        $this->load->view('include/admin/header', $data);
-        $this->load->view('admin/admin_homepage');
-        $this->load->view('include/admin/footer');
+                // Fetch Data Count
+                $data['user_count'] = $this->admindb->admin_user_count();
+                $data['user_list'] = $this->admindb->admin_user_list();
+                $data['order_count'] = $this->orderdb->admin_order_count();
+                $data['order_list'] = $this->orderdb->admin_order_list();
+                $data['product_count'] = $this->productdb->admin_product_count();
+                $data['product_list'] = $this->productdb->admin_product_list();
+                $data['transaction_count'] = $this->transactiondb->admin_transaction_count();
+                $data['transaction_list'] = $this->transactiondb->admin_transaction_list();
+                $this->load->view('include/admin/header', $data);
+                $this->load->view('admin/admin_homepage');
+                $this->load->view('include/admin/footer');
+            }
+        } elseif ($this->session->userdata('logged_in') == 1) {
+            redirect('Store');
+        } else {
+            redirect('Admin');
+        }
     }
 
     public function inventory() {
-        // Page Title
-        $data['title'] = "Inventory";
+        if ($this->session->userdata('login_status')) {
+            if ($this->session->userdata('login_status') == 'ADMIN') {
+                redirect('Admin/homepage');
+            } elseif ($this->session->userdata('login_status') == 'USER') {
+                redirect('Store');
+            } elseif ($this->session->userdata('login_status') == 'COURIER') {
+                redirect('Courier');
+            } else {
+                // Page Title
+                $data['title'] = "Inventory";
 
-        $data['product_count'] = $this->productdb->admin_product_count();
-        $data['product_list'] = $this->productdb->admin_product_list();
-        $this->load->view('include/admin/header', $data);
-        $this->load->view('admin/inventory_homepage');
-        $this->load->view('include/admin/footer');
+                $data['product_count'] = $this->productdb->admin_product_count();
+                $data['product_list'] = $this->productdb->admin_product_list();
+                $this->load->view('include/admin/header', $data);
+                $this->load->view('admin/inventory_homepage');
+                $this->load->view('include/admin/footer');
+            }
+        } elseif ($this->session->userdata('logged_in') == 1) {
+            redirect('Store');
+        } else {
+            // Page Title
+            redirect('Admin');
+        }
     }
 
     public function logout() {

@@ -25,6 +25,8 @@ class Store extends CI_Controller {
                 redirect('Admin/homepage');
             } elseif ($this->session->userdata('login_status') == 'COURIER') {
                 redirect('Courier');
+            } elseif ($this->session->userdata('login_status') == 'INVENTORY') {
+                redirect('Admin/inventory');
             } else {
                 $data['cart_items'] = $this->productdb->getItems($this->user_id);
                 $this->load->view('include/store/header');
