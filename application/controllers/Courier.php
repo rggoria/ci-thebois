@@ -9,7 +9,6 @@ class Courier extends CI_Controller {
         $this->load->model(array(
             'Courier_model' => 'courierdb',
             'Transaction_model' => 'transactiondb'
-            'Transaction_model' => 'transactiondb'
         ));
         // Load the helpers needed
         $this->load->helper(array('form','url'));
