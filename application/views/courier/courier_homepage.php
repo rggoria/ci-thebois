@@ -43,7 +43,7 @@
 </div>
 
 <div class="container-fluid my-3">
-    <h1>Bulletin Board of Completed Orderas</h1>
+    <h1>Bulletin Board of Completed Orders</h1>
     <section class="border border-dark p-5">
         <div class="row">
             <?php if (!$courier_transaction_list == 0): ?>

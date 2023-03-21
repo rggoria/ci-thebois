@@ -90,25 +90,25 @@
                     <?= form_open('Users/register_user'); ?>
                     <div class="mb-3">
                         <label class="form-label">First Name</label>
-                        <input type="text" name="fname" id="" class="form-control">
+                        <input type="text" name="fname" id="" class="form-control" required>
                         <label class="form-label">Last Name</label>
-                        <input type="text" name="lname" id="" class="form-control">
+                        <input type="text" name="lname" id="" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Complete Address</label>
-                        <input type="text" name="caddress" id="" class="form-control">
+                        <input type="text" name="caddress" id="" class="form-control" required>
                         <label class="form-label">Billing Address</label>
-                        <input type="text" name="baddress" id="" class="form-control">
+                        <input type="text" name="baddress" id="" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Contact Number</label>
-                        <input type="text" name="cnumber" id="" class="form-control">
+                        <input type="text" name="cnumber" id="" class="form-control" required>
                         <label class="form-label">Email Address</label>
-                        <input type="email" name="email" id="" class="form-control">
+                        <input type="email" name="email" id="" class="form-control" required>
                         <label class="form-label">Password</label>
-                        <input type="password" name="password" id="" class="form-control">
+                        <input type="password" name="password" id="" class="form-control" required>
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100">Register</button>

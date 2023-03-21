@@ -93,6 +93,7 @@ class Users extends CI_Controller {
                 'address' => $account->user_address,
                 'billing' => $account->user_billing,
                 'contact' => $account->user_contact,
+                'user_status' => $account->user_status,
                 'logged_in' => TRUE,
             );
             $this->session->set_userdata($userSession);

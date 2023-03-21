@@ -31,6 +31,8 @@ class Admin extends CI_Controller {
                 redirect('Admin/inventory');
             } elseif ($this->session->userdata('login_status') == 'COURIER') {
                 redirect('Courier');
+            } elseif ($this->session->userdata('login_status') == 'USER') {
+                redirect('Store');
             } else {
                 // Page Title
                 $data['title'] = "Admin: Login";
@@ -88,6 +90,8 @@ class Admin extends CI_Controller {
                         'login_fullname' => $account->user_firstname . ' ' . $account->user_lastname,
                         'login_firstname' => $account->user_firstname,
                         'login_lastname' => $account->user_lastname,
+                        'login_contact' => $account->user_contact,
+                        'login_address' => $account->user_address,
                         'login_email' => $account->user_email,
                         'login_password' => $account->user_password,
                         'login_status' => $account->user_status                        
@@ -225,13 +229,6 @@ class Admin extends CI_Controller {
             'regex_match' => $regex_match
         ));
 
-        $this->form_validation->set_rules('username', 'User Name', 'required|min_length[6]|alpha_numeric|is_unique[user_table.user_username]', array(
-            'required' => $required,
-            'min_length' => 'Must contain at least 6 characters',
-            'alpha_numeric' => 'Must only contain alpha-numeric characters',
-            'is_unique' => 'That username is taken. Try another.'
-        ));
-
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[user_table.user_email]', array(
             'required' => "This field must not be empty",
             'valid_email' => 'Invalid email format',
@@ -248,16 +245,15 @@ class Admin extends CI_Controller {
             $data['title'] = "GoShopping: Admin";
             $this->load->view('include/admin/header', $data);
             $this->load->view('admin/admin_add_courier', $data);
-            $this->load->view('include/footer', $data);           
+            $this->load->view('include/admin/footer', $data);
         } else {
             // Get data from inputs
             $data['user_firstname'] = $this->input->post('firstname');        
             $data['user_lastname'] = $this->input->post('lastname');
-            $data['user_username'] = $this->input->post('username');
             $data['user_email'] = $this->input->post('email');
             $data['user_password'] = $this->input->post('password');
             $data['user_status'] = 'COURIER';
-            $this->admindb->admin_create_user($data); 
+            $this->admindb->admin_create_user($data);
 
             $this->session->set_flashdata('user_success', 'Account Successfully created');
             redirect('Admin/add_courier');

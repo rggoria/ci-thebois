@@ -93,8 +93,8 @@
                                                             <td><?= $user->user_email; ?></td>
                                                             <td><?= $user->user_status; ?></td>
                                                             <td class="d-flex justify-content-start p-5">
-                                                                <?php if ($user->user_status == 'ADMIN'): ?>
-                                                                    <a href="<?= site_url('Admin/edit_courier/'.$user->user_id) ?>" class="btn btn-warning mx-1" type="button">Edit</a>
+                                                                <?php if ($user->user_status == 'ADMIN' || $user->user_status == 'INVENTORY'): ?>
+                                                                    <?php continue; ?>
                                                                 <?php elseif($user->user_status == 'DISABLE'): ?>
                                                                     <a href="<?= site_url('Admin/edit_courier/'.$user->user_id) ?>" class="btn btn-warning mx-1" type="button">Edit</a>
                                                                     <a href="<?= site_url('Admin/courier_user/'.$user->user_id) ?>" class="btn btn-info mx-1" type="button">COURIER</a>
@@ -204,7 +204,6 @@
                                                 <tr>
                                                     <th scope="col">ID</th>
                                                     <th scope="col">Status</th>
-                                                    <th scope="col">Date Created</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -213,7 +212,6 @@
                                                         <tr>
                                                             <td><?= $transaction->transaction_id; ?></td>
                                                             <td><?= $transaction->shipment_status; ?></td>
-                                                            <td><?= $transaction->shipment_date; ?></td>
                                                         </tr>
                                                     <?php endforeach; ?>
                                                 <?php endif; ?>
