@@ -4,6 +4,7 @@
         <h1 class="text-white">ADMIN: Add Inventory Module</h1>
     </div>
 </section>
+
 <section class="text-center p-5">
     <div class="card d-flex justify-content-center align-items-center">
         <img src="<?= base_url('resources/images/inventory.png') ?>" height="200" width="200">

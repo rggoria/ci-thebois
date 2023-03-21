@@ -74,14 +74,14 @@ background-size: cover;">
         </div>
 
         <div class="col-md-6 p-5">
-                <h1  style="color: #219150;">WHAT'S HOT?</h1> <br>
-                Gundam fans, get ready to upgrade your collection with the latest releases! One of the newest additions is the MGEX Unicorn Gundam Ver.Ka. This 1/100 scale model features a stunning LED lighting system, as well as a new inner frame design for improved posability.
-                <br> <br>
-                For those who prefer smaller models, the HGUC Penelope (Mobile Suit Gundam: Hathaway) is a must-have. This 1/144 scale model boasts intricate details, including metallic accents and a newly designed shield.
-                <br> <br>
-                In addition to model kits, there are also plenty of new accessories available. The Gundam Marker Airbrush System is perfect for those who want to take their painting skills to the next level. The kit includes an airbrush, compressor, and various accessories for easy use.
-                <br> <br>
-                <button class="btn btn-primary">Check it out now!</button>
+            <h1  style="color: #219150;">WHAT'S HOT?</h1> <br>
+            Gundam fans, get ready to upgrade your collection with the latest releases! One of the newest additions is the MGEX Unicorn Gundam Ver.Ka. This 1/100 scale model features a stunning LED lighting system, as well as a new inner frame design for improved posability.
+            <br> <br>
+            For those who prefer smaller models, the HGUC Penelope (Mobile Suit Gundam: Hathaway) is a must-have. This 1/144 scale model boasts intricate details, including metallic accents and a newly designed shield.
+            <br> <br>
+            In addition to model kits, there are also plenty of new accessories available. The Gundam Marker Airbrush System is perfect for those who want to take their painting skills to the next level. The kit includes an airbrush, compressor, and various accessories for easy use.
+            <br> <br>
+            <button class="btn btn-primary">Check it out now!</button>
         </div>
     </div>
 </div>

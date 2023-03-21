@@ -17,7 +17,6 @@ class Order_model extends CI_Model {
             return $query->num_rows();
         }
     }
-
     // Admin Order List
     public function admin_order_list() {
         $query = $this->db->from("order_table")->get();

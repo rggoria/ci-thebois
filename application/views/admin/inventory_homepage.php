@@ -5,8 +5,10 @@
             <div class="ms-auto">
                 <a href="<?= site_url('Admin/logout') ?>" class="btn btn-danger" type="button">Logout</a>
             </div>
-        </div>      
+        </div>
+
         <hr>    
+        
         <div class="card-header d-flex align-items-center">
             <img src="<?= base_url('resources/images/inventory.png') ?>" alt="" height="25">
             <span class="ms-2">List of Inventory</span>

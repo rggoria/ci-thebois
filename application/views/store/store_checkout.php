@@ -3,6 +3,7 @@
         <div class="col-md-6 border-end border-2 mb-4 mb-sm-0">
             <h5>Shipping Information</h5>
             <?= form_open('Store/order_fulfill/'. $this->user_id); ?>
+            
                 <div class="mb-2">
                     <label class="form-label">Complete Address</label>
                     <input type="text" name="address" id="" class="form-control" value="<?= $this->address; ?>">

@@ -20,6 +20,7 @@
             <div class="card-body">
                <h2 class="card-title">Real Grade Gundam</h2>
                High Grade Gundam is a line of plastic model kits that offers detailed and affordable models of various mobile suits from the Gundam franchise. They are easy to assemble and offer a great entry point for beginners in the world of Gundam model kits.
+               
                <hr>
 
                <div class="row">

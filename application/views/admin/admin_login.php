@@ -7,6 +7,7 @@
 						<div class="col-md-6 col-lg-5 d-none d-md-block">
 							<img src="https://e0.pxfuel.com/wallpapers/632/437/desktop-wallpaper-gundam-android-2021-android-gundam-logo.jpg" alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
 						</div>
+                        
 						<div class="col-md-6 col-lg-7 d-flex align-items-center">
 							<div class="card-body p-4 p-lg-5 text-black">
                                 <?= form_open('Admin/login_validation');?>

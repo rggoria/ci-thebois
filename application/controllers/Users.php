@@ -96,6 +96,7 @@ class Users extends CI_Controller {
                 'user_status' => $account->user_status,
                 'logged_in' => TRUE,
             );
+            
             $this->session->set_userdata($userSession);
             redirect('Users/profile/'. $account->user_id);
         } else {

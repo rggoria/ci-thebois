@@ -119,6 +119,7 @@
                                     </div>
                                 </div>
                             </section>
+                            
                             <!-- List of Inventory Section -->
                             <section class="container-fluid px-0" id="simple-list-item-3">
                                 <div class="card">

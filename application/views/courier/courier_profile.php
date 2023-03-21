@@ -81,6 +81,7 @@
 
 						</div>
 					</div>
+					
 				<?php form_close(); ?>
 			</div>
 		</div>

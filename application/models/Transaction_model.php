@@ -27,7 +27,6 @@ class Transaction_model extends CI_Model {
             return $query->result();
         }
     }
-
     // User Add Transaction
     public function add_transaction($transactionData, $user_id) {
         $this->db->insert('transaction_table', $transactionData);

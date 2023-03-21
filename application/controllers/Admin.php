@@ -384,7 +384,8 @@ class Admin extends CI_Controller {
 
     // Start Edit Product Functions //
     public function edit_product_validation($id) {
-        $required = "This field must not be empty";     
+        $required = "This field must not be empty";  
+           
 
         $this->form_validation->set_rules('productdescription', 'Product Description', 'required', array(
             'required' => $required
@@ -410,5 +411,4 @@ class Admin extends CI_Controller {
         }
     }
     // End Edit Product Functions //
-
 };

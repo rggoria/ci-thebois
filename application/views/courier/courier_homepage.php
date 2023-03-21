@@ -76,7 +76,7 @@
                                     <p class="card-text">Client Name: <?= $transaction->user_firstname . ' ' . $transaction->user_lastname; ?></p>
                                     <p class="card-text">Product Price: <?= $transaction->product_price; ?></p>
                                     <div class="card">
-                                        <a href="#" class="btn btn-white border-success">DELIVERED</a>
+                                        <a class="btn btn-white border-success">DELIVERED</a>
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +93,7 @@
                                     <p class="card-text">Client Name: <?= $transaction->user_firstname . ' ' . $transaction->user_lastname; ?></p>
                                     <p class="card-text">Product Price: <?= $transaction->product_price; ?></p>
                                     <div class="card">
-                                        <a href="#" class="btn btn-white border-danger">CANCELLED</a>
+                                        <a class="btn btn-white border-danger">CANCELLED</a>
                                     </div>
                                 </div>
                             </div>

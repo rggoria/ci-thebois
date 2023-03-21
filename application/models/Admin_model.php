@@ -7,7 +7,6 @@ class Admin_model extends CI_Model {
         // Database library
         $this->load->database();
     }
-
     // Login Verification
     public function login_validation($email, $password) {
         $query = $this->db->get_where('user_table', array(

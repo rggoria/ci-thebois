@@ -11,7 +11,6 @@ class Courier_model extends CI_Model {
     public function update_user($id, $data) {
         $this->db->update('user_table', $data, array('user_id' => $id));
     }
-
     public function courier_reserved_transaction($id, $reserved_id) {       
         $this->db->where('transaction_id', $id);
         $data = array(

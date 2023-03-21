@@ -25,7 +25,6 @@ class Users_model extends CI_Model {
     public function insertUser($userData) {
         $this->db->insert('user_table', $userData);
     }
-
     public function updateUser($userData, $user_id) {
         $this->db->update('user_table', $userData, array('user_id' => $user_id));
     }
