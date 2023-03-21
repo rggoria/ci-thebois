@@ -31,9 +31,13 @@
                                     <img src="<?= base_url('resources/images/product/'.$product->product_image);?>" alt="" class="card-img-top img-fluid">
                                     <div class="card-body">
                                        <h5 class="card-title"><?= $product->product_name; ?></h5>
-                                       <span class="badge text-bg-warning">Limited Stock</span>
+                                       <?php if ($product->product_status == 'ACTIVE'): ?>
+                                          <span class="badge text-bg-warning">Limited Stock</span>
+                                       <?php elseif ($product->product_status != 'ACTIVE'): ?>
+                                          <span class="badge text-bg-danger">Out of Stock</span>
+                                       <?php endif; ?>
                                        <p class="fw-bold">Pricing: <?= number_format($product->product_price,2) ?></p>
-                                       <?php if ($this->logged_in): ?>
+                                       <?php if ($this->logged_in && $product->product_status == 'ACTIVE'): ?>
                                           <a href="<?= site_url('Store/add_cart/' . $product->product_id . '/' . $product->product_name . '/' . $product->product_price); ?>" class="btn btn-outline-primary">Add to Cart</a>
                                        <?php endif; ?>                                       
                                     </div>
