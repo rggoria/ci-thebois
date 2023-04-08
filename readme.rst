@@ -2,7 +2,7 @@
 Introduction
 ###################
 
-This project is a e-commerce website that features Gundam Products. It is also our final project
+This project is a E-Commerce Web-based System that features Gundam Products. It is also our final project
 requirement on the course subject "E-Commerce with Digital Marketing"
 
 *******************
