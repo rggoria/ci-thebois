@@ -26,29 +26,29 @@ Step-by-step Installation:
 
 1. For github clone
     - Open your htdocs folder and open the terminal
-    - Paste this code on the terminal: git clone https://github.com/rggoria/ci_thebois.git
+    - Paste this code on the terminal: git clone https://github.com/rggoria/ci-thebois.git
     - Run your preferred browser then go to phpMyAdmin
-    - Create a new database named: ci_thebois
+    - Create a new database named: ci-thebois
     - Then click the Import on the navigation
-    - The file is on the root folder that has a name: ci_thebois.sql
+    - The file is on the root folder that has a name: ci-thebois.sql
     - Click the Choose File input and navigate the file
     - Then go down on the webpage then click the Import button and wait
-    - You can now run the project by input on the on the url: localhost/ci_thebois
-    Note: make sure your php server is running
+    - You can now run the project by input on the on the url: localhost/ci-thebois
+    Note: Make sure your php server is running
 
 2. For download zip
     - Extract the zip file
-    - Then open the folder then you can see the filename: ci_thebois-main
-    - Rename the folder: ci_thebois-main into ci_thebois
-    - Move the ci_thebois file on the htdocs folder
+    - Then open the folder then you can see the filename: ci-thebois-main
+    - Rename the folder: ci-thebois-main into ci-thebois
+    - Move the ci-thebois file on the htdocs folder
     - Run your preferred browser then go to phpMyAdmin
-    - Create a new database named: ci_thebois
+    - Create a new database named: ci-thebois
     - Then click the Import on the navigation
-    - The file is on the root folder that has a name: ci_thebois.sql
+    - The file is on the root folder that has a name: ci-thebois.sql
     - Click the Choose File input and navigate the file
     - Then go down on the webpage then click the Import button and wait
-    - You can now run the project by input on the on the url: localhost/ci_thebois
-    Note: make sure your php server is running
+    - You can now run the project by input on the on the url: localhost/ci-thebois
+    Note: Make sure your php server is running
 
 **************************
 Features
